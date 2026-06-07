@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 
-export default function StarField() {
+function StarField() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -19,8 +19,8 @@ export default function StarField() {
       return '#06B6D4';
     };
 
-    const createStars = (w, h) =>
-      Array.from({ length: 200 }, () => ({
+    const createStars = (w, h, count) =>
+      Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
         radius: Math.random() * 1.5 + 0.3,
@@ -32,13 +32,17 @@ export default function StarField() {
         color: getColor(),
       }));
 
+    let stars = [];
+
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      stars = createStars(canvas.width, canvas.height);
+      // Use fewer stars on mobile for performance
+      const isMobile = window.innerWidth < 768;
+      const starCount = isMobile ? 100 : 180;
+      stars = createStars(canvas.width, canvas.height, starCount);
     };
 
-    let stars = [];
     resize();
 
     const draw = () => {
@@ -90,7 +94,10 @@ export default function StarField() {
         width: '100vw',
         height: '100vh',
         pointerEvents: 'none',
+        willChange: 'transform',
       }}
     />
   );
 }
+
+export default memo(StarField);

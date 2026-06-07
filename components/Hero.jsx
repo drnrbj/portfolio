@@ -82,6 +82,7 @@ export default function Hero() {
   return (
     <section
       id="home"
+      className="hero-scan"
       style={{
         minHeight: '100vh',
         display: 'flex',
@@ -141,24 +142,23 @@ export default function Hero() {
               marginBottom: '24px',
             }}
           >
-            <span
-              style={{
-                width: 6,
-                height: 6,
-                background: '#06B6D4',
-                borderRadius: '50%',
-                display: 'inline-block',
-                animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite',
-              }}
-            />
-            <span style={{ color: '#06B6D4', fontSize: 14, fontWeight: 500 }}>
+            <span style={{ color: '#60A5FA', fontSize: 14, fontWeight: 500 }}>
               Welcome to My Portfolio
             </span>
           </div>
 
           {/* Heading */}
           <div style={{ lineHeight: 1.2 }}>
-            <div style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 400, fontSize: '1.5rem' }}>
+            <div
+              style={{
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontWeight: 900,
+                letterSpacing: '-0.02em',
+                color: '#fff',
+                margin: 0,
+                lineHeight: 1.1,
+              }}
+            >
               Hi, I'm
             </div>
             <h1
@@ -167,7 +167,7 @@ export default function Hero() {
                 fontSize: 'clamp(2.5rem, 5vw, 4rem)',
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
-                margin: '4px 0 0',
+                margin: '0',
                 textShadow: '0 0 40px rgba(59,130,246,0.5)',
                 lineHeight: 1.1,
               }}
@@ -185,12 +185,12 @@ export default function Hero() {
               marginTop: '16px',
             }}
           >
-            <span style={{ color: '#3B82F6', fontSize: '1.2rem', fontWeight: 500 }}>
+            <span style={{ color: '#60A5FA', fontSize: '1.2rem', fontWeight: 500 }}>
               {displayText}
             </span>
             <span
               style={{
-                color: '#3B82F6',
+                color: '#60A5FA',
                 fontSize: '1.2rem',
                 fontWeight: 300,
                 marginLeft: 2,
@@ -222,14 +222,14 @@ export default function Hero() {
             <button
               className="btn-primary"
               onClick={() => scrollTo('projects')}
-              style={{ cursor: 'none' }}
+              style={{ cursor: 'pointer' }}
             >
               View Projects
             </button>
             <button
               className="btn-outline"
               onClick={() => scrollTo('contact')}
-              style={{ cursor: 'none' }}
+              style={{ cursor: 'pointer' }}
             >
               Contact Me
             </button>
@@ -279,11 +279,13 @@ export default function Hero() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            marginTop: '-60px',
+            marginLeft: '20px',
           }}
         >
           <div
             className="animate-float"
-            style={{ position: 'relative', width: 360, height: 360, margin: '0 auto' }}
+            style={{ position: 'relative', width: 300, height: 300, margin: '0 auto' }}
           >
             {/* Glow backdrop */}
             <div
@@ -302,7 +304,7 @@ export default function Hero() {
               className="animate-spin-slow"
               style={{
                 position: 'absolute',
-                inset: -40,
+                inset: -35,
                 border: '1px solid rgba(59,130,246,0.2)',
                 borderRadius: '50%',
               }}
@@ -327,7 +329,7 @@ export default function Hero() {
               className="animate-spin-reverse"
               style={{
                 position: 'absolute',
-                inset: -20,
+                inset: -18,
                 border: '1px dashed rgba(139,92,246,0.2)',
                 borderRadius: '50%',
               }}
@@ -352,7 +354,7 @@ export default function Hero() {
               className="animate-spin-slow"
               style={{
                 position: 'absolute',
-                inset: -5,
+                inset: -4,
                 borderRadius: '50%',
                 background:
                   'conic-gradient(from 0deg, transparent, #3B82F6, transparent, #8B5CF6, transparent)',
@@ -360,36 +362,61 @@ export default function Hero() {
             />
 
             {/* Profile image circle */}
-            {/* Replace with actual photo: add <img src="/photo.jpg" ... /> inside */}
             <div
               style={{
                 position: 'absolute',
-                inset: 4,
+                inset: 3,
                 borderRadius: '50%',
                 overflow: 'hidden',
-                background: 'linear-gradient(135deg, #1a1a3e, #0d0d2b)',
+                background: 'linear-gradient(135deg, #1e1b4b, #1e3a5f)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              {/* Placeholder silhouette */}
+              {/* Silhouette icon */}
               <svg
-                width="80"
-                height="80"
+                width="70"
+                height="70"
                 viewBox="0 0 24 24"
-                fill="rgba(255,255,255,0.2)"
+                fill="rgba(255,255,255,0.15)"
+                style={{ position: 'absolute' }}
               >
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
               </svg>
-              <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 8 }}>
-                Profile Photo
+              {/* DJ monogram */}
+              <span
+                style={{
+                  color: 'rgba(255,255,255,0.3)',
+                  fontSize: 42,
+                  fontWeight: 900,
+                  lineHeight: 1,
+                  position: 'relative',
+                  zIndex: 1,
+                  letterSpacing: '-2px',
+                }}
+              >
+                DJ
               </span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom fade — blends hero into about section */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 120,
+          background: 'linear-gradient(to bottom, transparent, #050510)',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
 
       {/* Responsive: stack columns on mobile */}
       <style>{`

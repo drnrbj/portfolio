@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dranrebjay.vercel.app/sitemap.xml
