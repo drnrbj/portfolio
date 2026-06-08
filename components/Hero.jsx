@@ -299,56 +299,6 @@ export default function Hero() {
               }}
             />
 
-            {/* Ring 1 — outer slow spin */}
-            <div
-              className="animate-spin-slow"
-              style={{
-                position: 'absolute',
-                inset: -35,
-                border: '1px solid rgba(59,130,246,0.2)',
-                borderRadius: '50%',
-              }}
-            >
-              {RING1_DOTS.map((pos, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: 'absolute',
-                    width: 8,
-                    height: 8,
-                    background: 'rgba(59,130,246,0.6)',
-                    borderRadius: '50%',
-                    ...pos,
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Ring 2 — middle dashed reverse spin */}
-            <div
-              className="animate-spin-reverse"
-              style={{
-                position: 'absolute',
-                inset: -18,
-                border: '1px dashed rgba(139,92,246,0.2)',
-                borderRadius: '50%',
-              }}
-            >
-              {RING2_DOTS.map((pos, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: 'absolute',
-                    width: 6,
-                    height: 6,
-                    background: 'rgba(139,92,246,0.5)',
-                    borderRadius: '50%',
-                    ...pos,
-                  }}
-                />
-              ))}
-            </div>
-
             {/* Ring 3 — conic gradient spinning border */}
             <div
               className="animate-spin-slow"

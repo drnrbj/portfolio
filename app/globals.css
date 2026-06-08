@@ -145,23 +145,6 @@ img {
   100% { transform: translateY(100vh); }
 }
 
-.hero-scan {
-  position: relative;
-}
-
-.hero-scan::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
-  animation: scan 8s linear infinite;
-  pointer-events: none;
-  z-index: 3;
-}
-
 /* ── Glassmorphism shimmer on hover ── */
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
