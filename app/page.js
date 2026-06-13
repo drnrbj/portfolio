@@ -5,7 +5,6 @@ import Projects from '@/components/Projects';
 import Certifications from '@/components/Certifications';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import StarField from '@/components/StarField';
 import CursorEffect from '@/components/CursorEffect';
 import BackToTop from '@/components/BackToTop';
 
