@@ -11,12 +11,7 @@ const SKILL_CATEGORIES = [
   {
     name: 'Backend',
     color: '#8B5CF6',
-    skills: ['PHP', 'Laravel', 'Java', 'Python'],
-  },
-  {
-    name: 'Database',
-    color: '#06B6D4',
-    skills: ['MySQL'],
+    skills: ['PHP', 'Laravel', 'Java', 'Python', 'MySQL'],
   },
   {
     name: 'Tools',
@@ -25,10 +20,28 @@ const SKILL_CATEGORIES = [
   },
 ];
 
-const STATS = [
-  { number: '5+', label: 'Projects' },
-  { number: '2+', label: 'Years Learning' },
-  { number: '10+', label: 'Technologies' },
+const SOFT_SKILLS = [
+  { label: 'Problem Solving', icon: '◈', color: '#3B82F6' },
+  { label: 'Collaboration', icon: '◈', color: '#8B5CF6' },
+  { label: 'Adaptability', icon: '◈', color: '#10B981' },
+  { label: 'Attention to Detail', icon: '◈', color: '#F59E0B' },
+  { label: 'Communication', icon: '◈', color: '#EC4899' },
+  { label: 'Self-Motivated', icon: '◈', color: '#06B6D4' },
+];
+
+const EDUCATION = [
+  {
+    level: 'College',
+    school: 'University of Mindanao',
+    detail: 'Bachelor of Science in Computer Science',
+    color: '#3B82F6',
+  },
+  {
+    level: 'Senior High School',
+    school: 'Batangas Eastern Colleges',
+    detail: 'STEM Strand',
+    color: '#8B5CF6',
+  },
 ];
 
 export default function About() {
@@ -81,13 +94,7 @@ export default function About() {
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <h2
             className="glow-text"
-            style={{
-              fontSize: '80px',
-              // fontSize: 'clamp(2rem, 4vw, 3rem)',
-              fontWeight: 800,
-              marginTop: '16px',
-              lineHeight: 1.2,
-            }}
+            style={{ fontSize: '80px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}
           >
             About Me
           </h2>
@@ -109,129 +116,247 @@ export default function About() {
             margin: '0 auto',
             padding: '0 1.5rem',
             display: 'grid',
-            gap: '4rem',
-            alignItems: 'start',
+            gap: '2rem',
+            alignItems: 'stretch',
           }}
           className="about-grid"
         >
-          {/* LEFT — Biography */}
-          <div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {[
-                `I'm Dranreb Jay Arzadon, a Computer Science student at the University of Mindanao with a passion for turning complex problems into elegant software solutions. My journey in tech started with curiosity and has grown into a deep commitment to crafting high-quality digital experiences.`,
-                `I specialize in full-stack web development, working across modern JavaScript frameworks, PHP-based backend systems, and database design. I also have hands-on experience with machine learning concepts, which I've applied in academic projects including intrusion detection and phishing detection systems.`,
-                `Beyond coding, I'm driven by collaboration, clean design, and the belief that the best software solves real human problems. I am always looking for my next challenge.`,
-              ].map((para, i) => (
-                <p
-                  key={i}
-                  style={{
-                    color: 'rgba(255,255,255,0.65)',
-                    fontSize: '18px',
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-
-            {/* Stats row */}
+          {/* LEFT COLUMN */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {/* Biography card */}
             <div
+              className="glass"
               style={{
+                padding: '28px',
+                borderRadius: '16px',
+                border: '1px solid rgba(255,255,255,0.08)',
                 display: 'flex',
-                gap: '2rem',
-                marginTop: '32px',
-                flexWrap: 'wrap',
+                flexDirection: 'column',
+                gap: '1rem',
               }}
             >
-              {STATS.map(({ number, label }) => (
-                <div key={label}>
-                  <div
-                    className="glow-text"
-                    style={{ fontSize: '1.875rem', fontWeight: 900, lineHeight: 1 }}
-                  >
-                    {number}
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '16px', lineHeight: 1.8, margin: 0 }}>
+                I'm{' '}
+                <span style={{ color: '#fff', fontWeight: 700 }}>Dranreb Jay Arzadon</span>
+                , a Computer Science student at{' '}
+                <span
+                  style={{
+                    fontWeight: 700,
+                    background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  University of Mindanao
+                </span>{' '}
+                with a passion for turning complex problems into elegant software solutions.
+                My journey in tech started with curiosity and has grown into a deep commitment
+                to crafting high-quality digital experiences.
+              </p>
+
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '16px', lineHeight: 1.8, margin: 0 }}>
+                I specialize in full-stack web development, working across modern JavaScript
+                frameworks, PHP-based backend systems, and database design. I also have
+                hands-on experience with machine learning concepts, which I've applied in
+                academic projects. I'm driven by collaboration, clean design, and the belief that
+                the best software solves real human problems. I am always looking for my next
+                challenge.
+              </p>
+            </div>
+
+            {/* Education card */}
+            <div
+              className="glass"
+              style={{
+                padding: '28px',
+                borderRadius: '16px',
+                border: '1px solid rgba(255,255,255,0.08)',
+                flex: 1,
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.1rem',
+                  fontWeight: 700,
+                  color: '#fff',
+                  margin: '0 0 20px 0',
+                  letterSpacing: '0.03em',
+                }}
+              >
+                Education
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {EDUCATION.map((edu, i) => (
+                  <div key={edu.level} style={{ display: 'flex', gap: '16px' }}>
+                    {/* Timeline dot + line */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: 20,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 12,
+                          height: 12,
+                          borderRadius: '50%',
+                          background: edu.color,
+                          boxShadow: `0 0 8px ${edu.color}`,
+                          flexShrink: 0,
+                          marginTop: 4,
+                        }}
+                      />
+                      {i < EDUCATION.length - 1 && (
+                        <div
+                          style={{
+                            width: 2,
+                            flex: 1,
+                            minHeight: 32,
+                            background: `linear-gradient(180deg, ${edu.color}60, transparent)`,
+                            marginTop: 4,
+                          }}
+                        />
+                      )}
+                    </div>
+                    {/* Content */}
+                    <div style={{ paddingBottom: i < EDUCATION.length - 1 ? '20px' : 0 }}>
+                      <div
+                        style={{
+                          fontSize: '0.75rem',
+                          color: 'rgba(255,255,255,0.4)',
+                          fontWeight: 500,
+                          letterSpacing: '0.05em',
+                          textTransform: 'uppercase',
+                          marginBottom: 4,
+                        }}
+                      >
+                        {edu.level}
+                      </div>
+                      <div
+                        style={{ color: '#fff', fontWeight: 700, fontSize: '0.95rem', marginBottom: 2 }}
+                      >
+                        {edu.school}
+                      </div>
+                      <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem' }}>
+                        {edu.detail}
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      color: 'rgba(255,255,255,0.5)',
-                      fontSize: '0.875rem',
-                      marginTop: '4px',
-                    }}
-                  >
-                    {label}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* RIGHT — Tech Stack */}
-          <div>
-            <h3
+          {/* RIGHT COLUMN — Two stacked cards matching left column height */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+
+            {/* Technical Skills card */}
+            <div
+              className="glass"
               style={{
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: '#fff',
-                marginBottom: '24px',
+                padding: '28px',
+                borderRadius: '16px',
+                border: '1px solid rgba(255,255,255,0.08)',
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
-              Tech Stack
-            </h3>
-
-            {SKILL_CATEGORIES.map((category) => (
-              <div
-                key={category.name}
-                className="glass"
+              <h3
                 style={{
-                  padding: '20px',
-                  marginBottom: '16px',
-                  borderRadius: '12px',
-                  borderLeft: `3px solid ${category.color}`,
+                  fontSize: '1.1rem',
+                  fontWeight: 700,
+                  color: '#fff',
+                  margin: '0 0 20px 0',
+                  letterSpacing: '0.03em',
                 }}
               >
-                {/* Category header */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Technical Skills
+              </h3>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {SKILL_CATEGORIES.map((category) => (
                   <div
+                    key={category.name}
                     style={{
-                      width: 8,
-                      height: 8,
-                      background: category.color,
-                      borderRadius: '50%',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span
-                    style={{
-                      color: '#fff',
-                      fontWeight: 600,
-                      fontSize: '0.875rem',
+                      padding: '14px 16px',
+                      borderRadius: '10px',
+                      background: `${category.color}09`,
+                      border: `1px solid ${category.color}22`,
+                      borderLeft: `3px solid ${category.color}`,
                     }}
                   >
-                    {category.name}
-                  </span>
-                </div>
+                    {/* Category header */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: '#fff',
+                          fontWeight: 700,
+                          fontSize: '0.9rem',
+                          letterSpacing: '0.03em',
+                        }}
+                      >
+                        {category.name}
+                      </span>
+                    </div>
 
-                {/* Skill pills */}
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '8px',
-                    marginTop: '12px',
-                  }}
-                >
-                  {category.skills.map((skill) => (
-                    <SkillPill key={skill} skill={skill} />
-                  ))}
-                </div>
+                    {/* Skill chips */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                      {category.skills.map((skill) => (
+                        <SkillChip key={skill} skill={skill} color={category.color} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Soft Skills + Quote card */}
+            <div
+              className="glass"
+              style={{
+                padding: '28px',
+                borderRadius: '16px',
+                border: '1px solid rgba(255,255,255,0.08)',
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.1rem',
+                  fontWeight: 700,
+                  color: '#fff',
+                  margin: 0,
+                  letterSpacing: '0.03em',
+                }}
+              >
+                Soft Skills
+              </h3>
+
+              {/* Soft skill chips */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {SOFT_SKILLS.map((s) => (
+                  <SoftSkillChip key={s.label} label={s.label} color={s.color} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Responsive grid breakpoint */}
       <style>{`
         .about-grid {
           grid-template-columns: 1fr;
@@ -246,24 +371,84 @@ export default function About() {
   );
 }
 
-function SkillPill({ skill }) {
+function SkillChip({ skill, color }) {
   const [hovered, setHovered] = useState(false);
   return (
     <span
-      className="glass"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        padding: '4px 12px',
-        fontSize: '0.75rem',
-        borderRadius: '9999px',
-        color: hovered ? '#fff' : 'rgba(255,255,255,0.7)',
-        borderColor: hovered ? 'rgba(59,130,246,0.5)' : undefined,
-        transition: 'all 0.2s',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
+        padding: '4px 10px',
+        fontSize: '0.72rem',
+        borderRadius: '5px',
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.55)',
+        background: hovered ? `${color}1e` : 'rgba(255,255,255,0.04)',
+        border: `1px solid ${hovered ? `${color}55` : 'rgba(255,255,255,0.07)'}`,
+        fontWeight: 600,
+        letterSpacing: '0.03em',
+        transition: 'all 0.15s ease',
         cursor: 'default',
+        transform: hovered ? 'translateY(-1px)' : 'none',
+        boxShadow: hovered ? `0 4px 10px ${color}28` : 'none',
+        userSelect: 'none',
       }}
     >
+      <span
+        style={{
+          width: 4,
+          height: 4,
+          borderRadius: '1px',
+          background: hovered ? color : `${color}80`,
+          flexShrink: 0,
+          transition: 'background 0.15s ease',
+        }}
+      />
       {skill}
+    </span>
+  );
+}
+
+function SoftSkillChip({ label, color }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '7px',
+        padding: '6px 12px',
+        fontSize: '0.78rem',
+        borderRadius: '20px',
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.6)',
+        background: hovered ? `${color}18` : 'rgba(255,255,255,0.04)',
+        border: `1px solid ${hovered ? `${color}50` : 'rgba(255,255,255,0.08)'}`,
+        fontWeight: 600,
+        letterSpacing: '0.02em',
+        transition: 'all 0.15s ease',
+        cursor: 'default',
+        transform: hovered ? 'translateY(-1px)' : 'none',
+        boxShadow: hovered ? `0 4px 12px ${color}22` : 'none',
+        userSelect: 'none',
+      }}
+    >
+      {/* Pill dot */}
+      <span
+        style={{
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          background: hovered ? color : `${color}70`,
+          flexShrink: 0,
+          transition: 'background 0.15s ease',
+          boxShadow: hovered ? `0 0 6px ${color}` : 'none',
+        }}
+      />
+      {label}
     </span>
   );
 }
