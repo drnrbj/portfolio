@@ -1,9 +1,9 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Dranreb Jay Arzadon | CS Student & Software Developer',
+  title: 'Dranreb Jay Arzadon',
   description:
-    'Portfolio of Dranreb Jay Arzadon — Computer Science student, aspiring software developer, and web developer based in the Philippines.',
+    'Portfolio of Dranreb Jay Arzadon',
   icons: {
     icon: '/images/logos.png',
   },
@@ -22,13 +22,13 @@ export const metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://dranrebjay.vercel.app',
-    title: 'Dranreb Jay Arzadon | Portfolio',
+    title: 'Dranreb Jay Arzadon',
     description: 'CS Student & Aspiring Software Developer',
-    siteName: 'Dranreb Jay Arzadon Portfolio',
+    siteName: 'Dranreb Jay Arzadon',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dranreb Jay Arzadon | Portfolio',
+    title: 'Dranreb Jay Arzadon',
     description: 'CS Student & Aspiring Software Developer',
   },
   robots: { index: true, follow: true },
