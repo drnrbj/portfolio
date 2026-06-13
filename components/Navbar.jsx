@@ -4,36 +4,57 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '#home', id: 'home' },
+  { label: 'About', href: '#about', id: 'about' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       setScrolled(currentScrollY > 50);
-
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setVisible(false);
         setMobileMenuOpen(false);
       } else {
         setVisible(true);
       }
-
       lastScrollY.current = currentScrollY;
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Track which section is in view
+  useEffect(() => {
+    const observers = [];
+
+    NAV_LINKS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        {
+          rootMargin: '-30% 0px -60% 0px', // triggers when section is in the upper 40% of viewport
+          threshold: 0,
+        }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   const scrolledStyle = {
@@ -81,29 +102,31 @@ export default function Navbar() {
           </a>
 
           {/* Desktop nav links */}
-          <div
-            style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}
-            className="hidden-mobile"
-          >
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                style={{
-                  color: 'rgba(255,255,255,0.7)',
-                  textDecoration: 'none',
-                  fontSize: 15,
-                  transition: 'color 0.3s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
-              >
-                {link.label}
-              </a>
-            ))}
+          <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} className="hidden-mobile">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`nav-item${isActive ? ' nav-active' : ''}`}
+                  style={{
+                    color: isActive ? '#fff' : 'rgba(255,255,255,0.5)',
+                    textDecoration: 'none',
+                    fontSize: 15,
+                    fontWeight: isActive ? 600 : 400,
+                    transition: 'color 0.3s, font-weight 0.3s',
+                    position: 'relative',
+                    padding: '4px 0',
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
 
-          {/* Hamburger — mobile only */}
+          {/* Hamburger */}
           <button
             onClick={() => setMobileMenuOpen((v) => !v)}
             className="show-mobile"
@@ -149,31 +172,45 @@ export default function Navbar() {
               WebkitBackdropFilter: 'blur(20px)',
             }}
           >
-            {NAV_LINKS.map((link, i) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  display: 'block',
-                  padding: '16px 24px',
-                  color: 'rgba(255,255,255,0.8)',
-                  textDecoration: 'none',
-                  fontSize: 15,
-                  borderBottom: i < NAV_LINKS.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link, i) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '16px 24px',
+                    color: isActive ? '#fff' : 'rgba(255,255,255,0.7)',
+                    textDecoration: 'none',
+                    fontSize: 15,
+                    fontWeight: isActive ? 600 : 400,
+                    borderBottom: i < NAV_LINKS.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+                    transition: 'color 0.2s',
+                    background: isActive ? 'rgba(59,130,246,0.06)' : 'transparent',
+                  }}
+                >
+                  {isActive && (
+                    <div style={{
+                      width: 4,
+                      height: 4,
+                      borderRadius: '50%',
+                      background: '#3B82F6',
+                      flexShrink: 0,
+                    }} />
+                  )}
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
         )}
       </nav>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .logo-img {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
@@ -182,6 +219,20 @@ export default function Navbar() {
           transform: scale(1.1);
           filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.6));
         }
+        .nav-item::after {
+          content: "";
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+          border-radius: 2px;
+          transition: width 0.3s ease;
+        }
+        .nav-item:hover::after { width: 100%; }
+        .nav-active::after { width: 100% !important; }
+        .nav-active { text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
         @media (min-width: 768px) {
           .hidden-mobile { display: flex !important; }
           .show-mobile { display: none !important; }
@@ -190,7 +241,7 @@ export default function Navbar() {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: flex !important; }
         }
-      `}</style>
+      ` }} />
     </>
   );
 }

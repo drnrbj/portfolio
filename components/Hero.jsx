@@ -1,5 +1,6 @@
 'use client';
 
+import StarField from '@/components/StarField';
 import { useEffect, useState } from 'react';
 
 const ROLES = ['WELCOME TO MY PORTFOLIO', 'WELCOME TO MY PORTFOLIO', 'WELCOME TO MY PORTFOLIO'];
@@ -77,6 +78,7 @@ export default function Hero() {
         paddingTop: 30,
       }}
     >
+      <StarField />  {/* 👈 add here */}
       {/* ADD THIS — right here, before the grid container */}
       <div
         style={{

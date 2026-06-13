@@ -9,7 +9,7 @@ const PROJECTS = [
     description:
       'A comprehensive HR and workforce management platform built to streamline hotel operations — covering employee scheduling, attendance tracking, payroll processing, and performance evaluations across departments.',
     tags: ['PHP', 'Laravel', 'MySQL', 'Tailwind CSS', 'React', 'TypeScript'],
-    image: { src: '/images/hotel.png', alt: 'Hotel Employee Management System dashboard' },
+    image: { src: '/images/employee.jpg', alt: 'Hotel Employee Management System dashboard' },
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const PROJECTS = [
     description:
       'A machine learning-powered system that analyzes network traffic patterns to identify and classify potential security threats in real-time, providing actionable alerts and detailed threat reports.',
     tags: ['Python', 'Machine Learning', 'Jupyter Notebook', 'Scikit-learn'],
-    image: { src: '/images/nids.png', alt: 'Network Intrusion Detection System interface' },
+    image: { src: '/images/networkintrusion.png', alt: 'Network Intrusion Detection System interface' },
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const PROJECTS = [
     description:
       'A web-based clinic management system built for dental practices — streamlining patient registration, appointment scheduling, treatment recording, and billing with role-based access for admin, receptionist, and dentist users.',
     tags: ['Laravel', 'React', 'Inertia.js', 'TailwindCSS', 'SQLite'],
-    image: { src: '/images/dental.png', alt: 'Dental Clinic patient dashboard' },
+    image: { src: '/images/dentalcrms.png', alt: 'Dental Clinic patient dashboard' },
   },
   {
     id: 4,

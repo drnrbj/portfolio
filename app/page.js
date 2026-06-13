@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <>
       <CursorEffect />
-      <StarField />
       <Navbar />
       <main id="main-content">
         <Hero />
