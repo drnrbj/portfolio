@@ -6,341 +6,51 @@ const PROJECTS = [
   {
     id: 1,
     title: 'Hotel Employee Management System',
-    description: 'A comprehensive HR and workforce management platform built to streamline hotel operations — covering employee scheduling, attendance tracking, payroll processing, and performance evaluations across departments.',
+    description:
+      'A comprehensive HR and workforce management platform built to streamline hotel operations — covering employee scheduling, attendance tracking, payroll processing, and performance evaluations across departments.',
     tags: ['PHP', 'Laravel', 'MySQL', 'Tailwind CSS', 'React', 'TypeScript'],
-    color: '#3B82F6',
-    icon: '🏛️',
-    github: '#',
-    images: [
-      { src: '/images/projects/hotel-1.jpg', alt: 'Dashboard overview' },
-      { src: '/images/projects/hotel-2.jpg', alt: 'Employee scheduling' },
-      { src: '/images/projects/hotel-3.jpg', alt: 'Payroll module' },
-    ],
+    image: { src: '/images/hotel.png', alt: 'Hotel Employee Management System dashboard' },
   },
   {
     id: 2,
     title: 'Network Intrusion Detection System',
-    description: 'A machine learning-powered system that analyzes network traffic patterns to identify and classify potential security threats in real-time.',
+    description:
+      'A machine learning-powered system that analyzes network traffic patterns to identify and classify potential security threats in real-time, providing actionable alerts and detailed threat reports.',
     tags: ['Python', 'Machine Learning', 'Jupyter Notebook', 'Scikit-learn'],
-    color: '#8B5CF6',
-    icon: '🔐',
-    github: '#',
-    images: [
-      { src: '/images/projects/nids-1.jpg', alt: 'Detection dashboard' },
-      { src: '/images/projects/nids-2.jpg', alt: 'Threat analysis' },
-      { src: '/images/projects/nids-3.jpg', alt: 'Alert configuration' },
-    ],
+    image: { src: '/images/nids.png', alt: 'Network Intrusion Detection System interface' },
   },
   {
     id: 3,
     title: 'Dental Clinic CRMS',
-    description: 'A web-based clinic management system built for dental practices — streamlining patient registration, appointment scheduling, treatment recording, and billing with role-based access for admin, receptionist, and dentist users.',
+    description:
+      'A web-based clinic management system built for dental practices — streamlining patient registration, appointment scheduling, treatment recording, and billing with role-based access for admin, receptionist, and dentist users.',
     tags: ['Laravel', 'React', 'Inertia.js', 'TailwindCSS', 'SQLite'],
-    color: '#06B6D4',
-    icon: '🦷',
-    github: '#',
-    images: [
-      { src: '/images/projects/dental-1.jpg', alt: 'Patient dashboard' },
-      { src: '/images/projects/dental-2.jpg', alt: 'Appointment scheduler' },
-      { src: '/images/projects/dental-3.jpg', alt: 'Treatment records' },
-      { src: '/images/projects/dental-4.jpg', alt: 'Billing module' },
-    ],
+    image: { src: '/images/dental.png', alt: 'Dental Clinic patient dashboard' },
   },
   {
     id: 4,
     title: 'Salon Booking System',
-    description: 'A lightweight appointment booking system for salons — allowing customers to browse services, select stylists, and book time slots with an intuitive interface.',
+    description:
+      'A lightweight appointment booking system for salons — allowing customers to browse services, select stylists, and book time slots with an intuitive interface designed for ease of use on any device.',
     tags: ['PHP', 'HTML', 'CSS', 'JavaScript'],
-    color: '#10B981',
-    icon: '💇',
-    github: '#',
-    images: [
-      { src: '/images/projects/salon-1.jpg', alt: 'Booking homepage' },
-      { src: '/images/projects/salon-2.jpg', alt: 'Service selection' },
-      { src: '/images/projects/salon-3.jpg', alt: 'Appointment confirmation' },
-    ],
-  },
-  {
-    id: 5,
-    title: 'Email Phishing Detection System',
-    description: 'An AI-driven tool that uses natural language processing to analyze email content and headers, accurately identifying phishing attempts.',
-    tags: ['Python', 'NLP', 'Machine Learning', 'Flask'],
-    color: '#F59E0B',
-    icon: '🎣',
-    github: '#',
-    images: [
-      { src: '/images/projects/phishing-1.jpg', alt: 'Detection interface' },
-      { src: '/images/projects/phishing-2.jpg', alt: 'Email analysis results' },
-      { src: '/images/projects/phishing-3.jpg', alt: 'Threat report' },
-    ],
+    image: { src: '/images/salon.png', alt: 'Salon Booking System homepage' },
   },
 ];
 
-const GitHubIcon = ({ size = 16 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-  </svg>
-);
+// Theme colors
+const THEME = {
+  blue: '#3B82F6',
+  purple: '#8B5CF6',
+  gradient: 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+};
 
-const ArrowLeft = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M15 18l-6-6 6-6" />
-  </svg>
-);
-
-const ArrowRight = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M9 18l6-6-6-6" />
-  </svg>
-);
-
-// Colour swatch placeholder for missing images
-function ImageSwatch({ alt, color, style = {} }) {
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        background: `linear-gradient(135deg, ${color}22, ${color}44)`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        ...style,
-      }}
-    >
-      <span style={{ color: `${color}99`, fontSize: 11 }}>{alt}</span>
-    </div>
-  );
-}
-
-function ProjectCard({ project, onOpenLightbox }) {
-  const [hovered, setHovered] = useState(false);
-  const visibleThumbs = project.images.slice(0, 3);
-  const extraCount = project.images.length - 3;
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'relative',
-        cursor: 'pointer',
-        transform: hovered ? 'translateY(-8px)' : 'translateY(0)',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-        height: '100%',
-      }}
-    >
-      <div
-        className="glass"
-        style={{
-          padding: '28px',
-          height: '100%',
-          position: 'relative',
-          overflow: 'hidden',
-          border: `1px solid ${hovered ? project.color + '80' : project.color + '26'}`,
-          transition: 'border-color 0.3s',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        {/* Corner glow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: -40,
-            right: -40,
-            width: 80,
-            height: 80,
-            borderRadius: '50%',
-            background: `radial-gradient(circle, ${project.color}26 0%, transparent 70%)`,
-            filter: 'blur(20px)',
-            opacity: hovered ? 1 : 0,
-            transition: 'opacity 0.5s',
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* Image thumbnail strip */}
-        <div
-          onClick={() => onOpenLightbox(project)}
-          style={{
-            width: '100%',
-            height: 48,
-            display: 'flex',
-            gap: 4,
-            marginBottom: 20,
-            borderRadius: 8,
-            overflow: 'hidden',
-            cursor: 'pointer',
-            flexShrink: 0,
-          }}
-        >
-          {visibleThumbs.map((img, i) => {
-            const isLast = i === 2 && extraCount > 0;
-            return (
-              <div
-                key={i}
-                style={{
-                  flex: 1,
-                  height: 48,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  filter: hovered ? 'brightness(1.1)' : 'brightness(1)',
-                  transition: 'filter 0.3s',
-                }}
-              >
-                <ImageSwatch alt={img.alt} color={project.color} style={{ height: 48 }} />
-                {isLast && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      right: 0,
-                      background: 'rgba(0,0,0,0.6)',
-                      fontSize: 10,
-                      padding: '2px 6px',
-                      borderTopLeftRadius: 4,
-                      color: '#fff',
-                    }}
-                  >
-                    +{extraCount}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Top row: icon + github */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 12,
-              background: `${project.color}26`,
-              border: `1px solid ${project.color}4d`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 24,
-              flexShrink: 0,
-            }}
-          >
-            {project.icon}
-          </div>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="glass"
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 8,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'rgba(255,255,255,0.5)',
-              textDecoration: 'none',
-              border: '1px solid rgba(255,255,255,0.1)',
-              transition: 'all 0.2s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)';
-              e.currentTarget.style.color = '#3B82F6';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-              e.currentTarget.style.color = 'rgba(255,255,255,0.5)';
-            }}
-          >
-            <GitHubIcon />
-          </a>
-        </div>
-
-        {/* Title */}
-        <div style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 8 }}>
-          {project.title}
-        </div>
-
-        {/* Description — 3-line clamp */}
-        <div
-          style={{
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: '0.875rem',
-            lineHeight: 1.7,
-            marginBottom: 20,
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          {project.description}
-        </div>
-
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto' }}>
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                padding: '4px 12px',
-                fontSize: '0.75rem',
-                borderRadius: 9999,
-                background: `${project.color}1a`,
-                border: `1px solid ${project.color}4d`,
-                color: project.color,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
+/* ── Lightbox ─────────────────────────────────────────────────────────── */
 function Lightbox({ project, onClose }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fading, setFading] = useState(false);
-
-  const goTo = useCallback(
-    (idx) => {
-      setFading(true);
-      setTimeout(() => {
-        setCurrentIndex(idx);
-        setFading(false);
-      }, 150);
-    },
-    []
-  );
-
-  const prev = useCallback(
-    () => goTo(currentIndex === 0 ? project.images.length - 1 : currentIndex - 1),
-    [currentIndex, project.images.length, goTo]
-  );
-
-  const next = useCallback(
-    () => goTo(currentIndex === project.images.length - 1 ? 0 : currentIndex + 1),
-    [currentIndex, project.images.length, goTo]
-  );
-
   useEffect(() => {
-    const handler = (e) => {
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'Escape') onClose();
-    };
+    const handler = (e) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [prev, next, onClose]);
-
-  const hasMany = project.images.length > 1;
+  }, [onClose]);
 
   return (
     <div
@@ -349,255 +59,383 @@ function Lightbox({ project, onClose }) {
         position: 'fixed',
         inset: 0,
         zIndex: 200,
-        background: 'rgba(0,0,0,0.9)',
-        backdropFilter: 'blur(12px)',
+        background: 'rgba(0,0,0,0.92)',
+        backdropFilter: 'blur(16px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '2rem',
       }}
     >
-      {/* Close button */}
+      {/* Close */}
       <button
         onClick={onClose}
-        className="glass"
         style={{
           position: 'absolute',
-          top: 96,
+          top: 24,
           right: 32,
+          background: 'rgba(255,255,255,0.08)',
+          border: '1px solid rgba(255,255,255,0.15)',
+          borderRadius: '50%',
           width: 44,
           height: 44,
-          borderRadius: '50%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'rgba(255,255,255,0.7)',
-          fontSize: 20,
-          cursor: 'none',
-          border: '1px solid rgba(255,255,255,0.1)',
-          background: 'rgba(255,255,255,0.05)',
-          transition: 'color 0.2s',
+          fontSize: 22,
+          cursor: 'pointer',
+          transition: 'all 0.2s',
           zIndex: 10,
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-        onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
+        onMouseEnter={(e) => { 
+          e.currentTarget.style.background = 'rgba(59,130,246,0.2)'; 
+          e.currentTarget.style.borderColor = 'rgba(59,130,246,0.4)';
+          e.currentTarget.style.color = '#3B82F6'; 
+        }}
+        onMouseLeave={(e) => { 
+          e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; 
+          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+          e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; 
+        }}
       >
         ×
       </button>
 
-      {/* Content — stops propagation so clicking image doesn't close */}
+      {/* Image */}
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '56rem',
+          maxWidth: '72rem',
           width: '100%',
-          padding: '0 1rem',
-          position: 'relative',
+          borderRadius: 16,
+          overflow: 'hidden',
+          border: '1px solid rgba(59,130,246,0.2)',
+          boxShadow: '0 0 80px rgba(59,130,246,0.1), 0 0 120px rgba(139,92,246,0.05)',
         }}
       >
-        {/* Prev arrow */}
-        {hasMany && (
-          <button
-            onClick={prev}
-            className="glass"
-            style={{
-              position: 'absolute',
-              left: -8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: 48,
-              height: 48,
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'rgba(255,255,255,0.7)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: 'rgba(255,255,255,0.05)',
-              cursor: 'none',
-              transition: 'all 0.2s',
-              zIndex: 10,
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; }}
-          >
-            <ArrowLeft />
-          </button>
-        )}
-
-        {/* Main image */}
-        <div
-          style={{
-            opacity: fading ? 0 : 1,
-            transition: 'opacity 0.15s ease',
-            width: '100%',
-            minHeight: 300,
-            maxHeight: '70vh',
-            borderRadius: 12,
-            overflow: 'hidden',
-            border: '1px solid rgba(255,255,255,0.1)',
+        <img
+          src={project.image.src}
+          alt={project.image.alt}
+          style={{ width: '100%', height: 'auto', display: 'block' }}
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+            e.currentTarget.parentElement.style.background = 'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1))';
+            e.currentTarget.parentElement.style.minHeight = '420px';
+            e.currentTarget.parentElement.style.display = 'flex';
+            e.currentTarget.parentElement.style.alignItems = 'center';
+            e.currentTarget.parentElement.style.justifyContent = 'center';
           }}
-        >
-          <ImageSwatch
-            alt={project.images[currentIndex].alt}
-            color={project.color}
-            style={{ width: '100%', height: '60vh', maxHeight: '70vh' }}
-          />
-        </div>
-
-        {/* Next arrow */}
-        {hasMany && (
-          <button
-            onClick={next}
-            className="glass"
-            style={{
-              position: 'absolute',
-              right: -8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: 48,
-              height: 48,
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'rgba(255,255,255,0.7)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: 'rgba(255,255,255,0.05)',
-              cursor: 'none',
-              transition: 'all 0.2s',
-              zIndex: 10,
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; }}
-          >
-            <ArrowRight />
-          </button>
-        )}
-
-        {/* Counter */}
-        <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem', marginTop: 16 }}>
-          Image {currentIndex + 1} of {project.images.length}
-        </div>
-
-        {/* Thumbnail strip */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 20, flexWrap: 'wrap' }}>
-          {project.images.map((img, i) => (
-            <div
-              key={i}
-              onClick={() => goTo(i)}
-              style={{
-                width: 64,
-                height: 48,
-                borderRadius: 8,
-                overflow: 'hidden',
-                cursor: 'none',
-                border: `2px solid ${i === currentIndex ? project.color : 'transparent'}`,
-                opacity: i === currentIndex ? 1 : 0.5,
-                transition: 'all 0.2s',
-                flexShrink: 0,
-              }}
-            >
-              <ImageSwatch alt={img.alt} color={project.color} style={{ height: 48 }} />
-            </div>
-          ))}
-        </div>
+        />
       </div>
     </div>
   );
 }
 
-export default function Projects() {
-  const sectionRef = useRef(null);
+/* ── Project Row ──────────────────────────────────────────────────────── */
+function ProjectRow({ project, index }) {
+  const rowRef = useRef(null);
   const [visible, setVisible] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [imgHovered, setImgHovered] = useState(false);
+
+  const isEven = index % 2 === 0; // even → image left; odd → image right
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (rowRef.current) observer.observe(rowRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const openLightbox = useCallback((project) => {
-    setSelectedProject(project);
+  const openLightbox = useCallback(() => {
+    setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   }, []);
 
   const closeLightbox = useCallback(() => {
-    setSelectedProject(null);
+    setLightboxOpen(false);
     document.body.style.overflow = '';
   }, []);
 
-  const firstRow = PROJECTS.slice(0, 3);
-  const secondRow = PROJECTS.slice(3);
+  /* Slide direction: even rows slide from left, odd from right */
+  const slideFrom = isEven ? '-60px' : '60px';
+
+  return (
+    <>
+      <div
+        ref={rowRef}
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateX(0)' : `translateX(${slideFrom})`,
+          transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
+          transitionDelay: '0.05s',
+        }}
+      >
+        <div
+          className="project-row"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '3rem',
+            alignItems: 'center',
+            direction: isEven ? 'ltr' : 'rtl', // flip column order for odd rows
+          }}
+        >
+          {/* Image side */}
+          <div
+            style={{ direction: 'ltr' }}
+            onClick={openLightbox}
+            onMouseEnter={() => setImgHovered(true)}
+            onMouseLeave={() => setImgHovered(false)}
+          >
+            <div
+              style={{
+                position: 'relative',
+                borderRadius: 16,
+                overflow: 'hidden',
+                cursor: 'zoom-in',
+                border: `1px solid ${imgHovered ? 'rgba(59,130,246,0.4)' : 'rgba(255,255,255,0.1)'}`,
+                boxShadow: imgHovered
+                  ? '0 20px 60px rgba(59,130,246,0.15), 0 0 30px rgba(139,92,246,0.1)'
+                  : '0 8px 32px rgba(0,0,0,0.4)',
+                transition: 'all 0.35s ease',
+                transform: imgHovered ? 'scale(1.015)' : 'scale(1)',
+                aspectRatio: '16/10',
+                background: 'linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08))',
+              }}
+            >
+              <img
+                src={project.image.src}
+                alt={project.image.alt}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                  transition: 'filter 0.35s ease',
+                  filter: imgHovered ? 'brightness(1.05)' : 'brightness(0.95)',
+                }}
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
+
+              {/* Zoom hint overlay */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(135deg, transparent 60%, rgba(59,130,246,0.1), rgba(139,92,246,0.15))',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  justifyContent: 'flex-end',
+                  padding: '14px 16px',
+                  opacity: imgHovered ? 1 : 0,
+                  transition: 'opacity 0.25s ease',
+                  pointerEvents: 'none',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    color: '#fff',
+                    background: 'rgba(0,0,0,0.5)',
+                    backdropFilter: 'blur(6px)',
+                    padding: '4px 10px',
+                    borderRadius: 6,
+                    border: '1px solid rgba(59,130,246,0.3)',
+                  }}
+                >
+                  View image
+                </span>
+              </div>
+
+              {/* Blue-purple accent bar */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 3,
+                  background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)',
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Content side */}
+          <div style={{ direction: 'ltr', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {/* Accent line + index */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div
+                style={{
+                  width: 32,
+                  height: 2,
+                  background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)',
+                  borderRadius: 2,
+                  boxShadow: '0 0 8px rgba(59,130,246,0.5)',
+                }}
+              />
+              <span
+                style={{
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  background: 'linear-gradient(135deg, #3B82F6, #8B5CF6)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Project {String(index + 1).padStart(2, '0')}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h3
+              style={{
+                fontSize: 'clamp(1.3rem, 2vw, 1.75rem)',
+                fontWeight: 800,
+                color: '#fff',
+                margin: 0,
+                lineHeight: 1.25,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {project.title}
+            </h3>
+
+            {/* Description */}
+            <p
+              style={{
+                color: 'rgba(255,255,255,0.58)',
+                fontSize: '0.9rem',
+                lineHeight: 1.8,
+                margin: 0,
+              }}
+            >
+              {project.description}
+            </p>
+            
+            {/* Tags */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    padding: '5px 13px',
+                    fontSize: '0.73rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.03em',
+                    borderRadius: 6,
+                    background: 'rgba(59,130,246,0.08)',
+                    border: '1px solid rgba(59,130,246,0.2)',
+                    color: '#60A5FA',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(59,130,246,0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(59,130,246,0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(59,130,246,0.2)';
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {lightboxOpen && <Lightbox project={project} onClose={closeLightbox} />}
+    </>
+  );
+}
+
+/* ── Section ──────────────────────────────────────────────────────────── */
+export default function Projects() {
+  const headerRef = useRef(null);
+  const [headerVisible, setHeaderVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHeaderVisible(true); observer.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    if (headerRef.current) observer.observe(headerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="projects" style={{ padding: '120px 0', position: 'relative' }}>
       {/* Background glows */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
-        <div style={{ position: 'absolute', top: '20%', left: '5%', width: '40%', height: '60%', background: 'radial-gradient(ellipse, rgba(59,130,246,0.04) 0%, transparent 70%)' }} />
-        <div style={{ position: 'absolute', top: '30%', right: '5%', width: '40%', height: '60%', background: 'radial-gradient(ellipse, rgba(139,92,246,0.04) 0%, transparent 70%)' }} />
+        <div style={{ position: 'absolute', top: '10%', left: '0%', width: '45%', height: '55%', background: 'radial-gradient(ellipse, rgba(59,130,246,0.04) 0%, transparent 70%)' }} />
+        <div style={{ position: 'absolute', top: '40%', right: '0%', width: '45%', height: '55%', background: 'radial-gradient(ellipse, rgba(139,92,246,0.04) 0%, transparent 70%)' }} />
       </div>
 
-      <div
-        ref={sectionRef}
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(40px)',
-          transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
+      <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Section header */}
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <h2 className="glow-text" style={{
-            fontSize: '80px',
-            // fontSize: 'clamp(2rem, 4vw, 3rem)',
-            fontWeight: 800,
-            marginTop: '0px',
-            lineHeight: 1.2
-          }}>
+        <div
+          ref={headerRef}
+          style={{
+            textAlign: 'center',
+            marginBottom: '80px',
+            opacity: headerVisible ? 1 : 0,
+            transform: headerVisible ? 'translateY(0)' : 'translateY(24px)',
+            transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+          }}
+        >
+          <h2
+            className="glow-text"
+            style={{ fontSize: '80px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}
+          >
             Featured Projects
           </h2>
-          <div style={{ width: 120, height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
+          <div
+            style={{
+              width: 120,
+              height: 2,
+              background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)',
+              margin: '16px auto 0',
+              borderRadius: 2,
+            }}
+          />
         </div>
 
-        {/* First row — 3 cards */}
-        <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div className="projects-grid-3">
-            {firstRow.map((project) => (
-              <ProjectCard key={project.id} project={project} onOpenLightbox={openLightbox} />
-            ))}
-          </div>
-
-          {/* Second row — 2 cards centered */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
-            {secondRow.map((project) => (
-              <div key={project.id} style={{ maxWidth: '24rem', width: '100%' }}>
-                <ProjectCard project={project} onOpenLightbox={openLightbox} />
-              </div>
-            ))}
-          </div>
+        {/* Project rows */}
+        <div
+          style={{
+            maxWidth: '72rem',
+            margin: '0 auto',
+            padding: '0 1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '6rem',
+          }}
+        >
+          {PROJECTS.map((project, index) => (
+            <ProjectRow key={project.id} project={project} index={index} />
+          ))}
         </div>
       </div>
 
-      {/* Lightbox */}
-      {selectedProject && <Lightbox project={selectedProject} onClose={closeLightbox} />}
-
       <style>{`
-        .projects-grid-3 {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-        @media (min-width: 768px) {
-          .projects-grid-3 { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1024px) {
-          .projects-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 768px) {
+          .project-row {
+            grid-template-columns: 1fr !important;
+            direction: ltr !important;
+            gap: 1.5rem !important;
+          }
         }
       `}</style>
     </section>
