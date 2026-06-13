@@ -75,11 +75,10 @@ export default function Hero() {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        paddingTop: 30,
+        paddingTop: 80,
       }}
     >
-      <StarField />  {/* 👈 add here */}
-      {/* ADD THIS — right here, before the grid container */}
+      <StarField />
       <div
         style={{
           position: 'absolute',
@@ -112,25 +111,23 @@ export default function Hero() {
         className="hero-grid"
       >
         {/* ---- LEFT COLUMN ---- */}
-        <div style={{ order: 1 }}>
-          {/* Welcome pill */}
+        <div className="hero-left" style={{ order: 1 }}>
           {/* Typewriter role */}
           <div
             style={{
               height: 32,
               display: 'flex',
               alignItems: 'center',
-              marginTop: '16px',
               marginBottom: '16px',
             }}
           >
-            <span style={{ color: '#60A5FA', fontSize: '18px', fontWeight: 700 }}>
+            <span style={{ color: '#60A5FA', fontSize: 'clamp(0.875rem, 2vw, 18px)', fontWeight: 700 }}>
               {displayText}
             </span>
             <span
               style={{
                 color: '#60A5FA',
-                fontSize: '1.2rem',
+                fontSize: 'clamp(0.875rem, 2vw, 1.2rem)',
                 fontWeight: 300,
                 marginLeft: 2,
                 animation: 'blink 0.75s step-end infinite',
@@ -140,28 +137,11 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* <div
-              className="glass"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '8px 16px',
-                borderRadius: '9999px',
-                marginBottom: '12px',
-              }}
-            >
-              <span style={{ color: '#60A5FA', fontSize: 14, fontWeight: 500 }}>
-                Welcome to My Portfolio
-              </span>
-            </div> */}
-
           {/* Heading */}
           <div style={{ lineHeight: 1.2 }}>
             <div
               style={{
-                fontSize: '80px',
-                // fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontSize: 'clamp(2rem, 6vw, 80px)',
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 color: '#fff',
@@ -174,8 +154,7 @@ export default function Hero() {
             <h1
               className="glow-text"
               style={{
-                fontSize: '80px',
-                // fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontSize: 'clamp(2rem, 6vw, 80px)',
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 margin: '0',
@@ -187,36 +166,11 @@ export default function Hero() {
             </h1>
           </div>
 
-          {/* Typewriter role
-            <div
-              style={{
-                height: 32,
-                display: 'flex',
-                alignItems: 'center',
-                marginTop: '16px',
-              }}
-            >
-              <span style={{ color: '#60A5FA', fontSize: '1.2rem', fontWeight: 500 }}>
-                {displayText}
-              </span>
-              <span
-                style={{
-                  color: '#60A5FA',
-                  fontSize: '1.2rem',
-                  fontWeight: 300,
-                  marginLeft: 2,
-                  animation: 'blink 0.75s step-end infinite',
-                }}
-              >
-                |
-              </span>
-            </div> */}
-
           {/* Description */}
           <p
             style={{
               color: 'rgba(255,255,255,0.6)',
-              fontSize: '18px',
+              fontSize: 'clamp(0.875rem, 2vw, 18px)',
               lineHeight: 1.8,
               maxWidth: '42rem',
               marginTop: '24px',
@@ -284,19 +238,10 @@ export default function Hero() {
         </div>
 
         {/* ---- RIGHT COLUMN ---- */}
-        <div
-          style={{
-            order: 2,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '-60px',
-            marginLeft: '20px',
-          }}
-        >
+        <div className="hero-right" style={{ order: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div
             className="animate-float"
-            style={{ position: 'relative', width: 360, height: 360, margin: '0 auto' }}
+            style={{ position: 'relative', width: 'clamp(220px, 40vw, 360px)', height: 'clamp(220px, 40vw, 360px)', margin: '0 auto' }}
           >
             {/* Glow backdrop */}
             <div
@@ -309,7 +254,7 @@ export default function Hero() {
               }}
             />
 
-            {/* Spinning circle border (existing) */}
+            {/* Spinning circle border */}
             <div
               className="animate-spin-slow"
               style={{
@@ -321,16 +266,16 @@ export default function Hero() {
               }}
             />
 
-            {/* Spinning rectangle border (new) */}
+            {/* Spinning rectangle border */}
             <div
               className="animate-spin-slow"
               style={{
                 position: 'absolute',
-                inset: -20,                  // 👈 offset outward so it sits outside the circle
+                inset: -20,
                 borderRadius: '32px',
                 background:
                   'conic-gradient(from 180deg, transparent, #8B5CF6, transparent, #3B82F6, transparent)',
-                animation: 'spin-slow 6s linear infinite reverse', // 👈 spins opposite direction
+                animation: 'spin-slow 6s linear infinite reverse',
               }}
             />
 
@@ -358,17 +303,29 @@ export default function Hero() {
         </div>
       </div>
 
-      <style>{`
-        @media (max-width: 1023px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-          }
+      <style dangerouslySetInnerHTML={{
+            __html: `
+      @media (max-width: 1023px) {
+        .hero-grid {
+          grid-template-columns: 1fr !important;
         }
-        
-        @keyframes spin-slow {
-          to { transform: rotate(360deg); }
+        .hero-right {
+          order: -1 !important;
+          margin-bottom: 1rem;
         }
-      `}</style>
+        .hero-left {
+          order: 2 !important;
+          text-align: center;
+        }
+        .hero-left > div:first-child {
+          justify-content: center;
+        }
+      }
+
+      @keyframes spin-slow {
+        to { transform: rotate(360deg); }
+      }
+      ` }} />
     </section>
   );
 }
