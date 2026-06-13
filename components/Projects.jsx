@@ -397,7 +397,7 @@ export default function Projects() {
         >
           <h2
             className="glow-text"
-            style={{ fontSize: '80px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}
+            style={{ fontSize: 'clamp(3rem, 6vw, 80px)', fontWeight: 800, margin: 0, lineHeight: 1.2 }}
           >
             Featured Projects
           </h2>

@@ -144,7 +144,7 @@ export default function Contact() {
         {/* Section header */}
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <h2 className="glow-text" style={{
-            fontSize: '80px',
+            fontSize: 'clamp(3rem, 6vw, 80px)',
             fontWeight: 800,
             lineHeight: 1.2
           }}>

@@ -243,7 +243,7 @@ export default function Certifications() {
             transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
           }}
         >
-          <h2 className="glow-text" style={{ fontSize: 'clamp(2.5rem, 8vw, 80px)', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
+          <h2 className="glow-text" style={{ fontSize: 'clamp(3rem, 6vw, 80px)', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
             Certifications
           </h2>
           <div style={{ width: 'clamp(80px, 15vw, 120px)', height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />

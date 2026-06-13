@@ -94,7 +94,7 @@ export default function About() {
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <h2
             className="glow-text"
-            style={{ fontSize: '80px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}
+            style={{ fontSize: 'clamp(3rem, 6vw, 80px)', fontWeight: 800, margin: 0, lineHeight: 1.2 }}
           >
             About Me
           </h2>
