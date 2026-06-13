@@ -151,7 +151,7 @@ function CertCard({ cert, index }) {
           >
             <div
               style={{
-                fontSize: '0.9rem',
+                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
                 fontWeight: 700,
                 color: '#fff',
                 letterSpacing: '0.02em',
@@ -226,7 +226,7 @@ export default function Certifications() {
   }, []);
 
   return (
-    <section id="certifications" style={{ padding: '120px 0', position: 'relative' }}>
+    <section id="certifications" style={{ padding: 'clamp(60px, 10vw, 120px) 0', position: 'relative' }}>
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         <div style={{ position: 'absolute', top: '20%', left: '10%', width: '40%', height: '60%', background: 'radial-gradient(ellipse, rgba(59,130,246,0.04) 0%, transparent 70%)' }} />
         <div style={{ position: 'absolute', top: '20%', right: '10%', width: '40%', height: '60%', background: 'radial-gradient(ellipse, rgba(139,92,246,0.04) 0%, transparent 70%)' }} />
@@ -237,24 +237,24 @@ export default function Certifications() {
         <div
           ref={headerRef}
           style={{
-            textAlign: 'center', marginBottom: '64px',
+            textAlign: 'center', marginBottom: 'clamp(32px, 6vw, 64px)',
             opacity: headerVisible ? 1 : 0,
             transform: headerVisible ? 'translateY(0)' : 'translateY(24px)',
             transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
           }}
         >
-          <h2 className="glow-text" style={{ fontSize: '80px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
+          <h2 className="glow-text" style={{ fontSize: 'clamp(2rem, 8vw, 80px)', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
             Certifications
           </h2>
-          <div style={{ width: 120, height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
+          <div style={{ width: 'clamp(80px, 15vw, 120px)', height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
         </div>
 
         {/* Two cards side by side */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
+            gap: 'clamp(1rem, 3vw, 2rem)',
             maxWidth: '68rem',
             margin: '0 auto',
           }}
@@ -264,14 +264,6 @@ export default function Certifications() {
           ))}
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .cert-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
