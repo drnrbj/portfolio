@@ -116,16 +116,6 @@ export default function About() {
         >
           {/* LEFT — Biography */}
           <div>
-            <h3
-              style={{
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: '#fff',
-                marginBottom: '24px',
-              }}
-            >
-              Who I Am
-            </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 `I'm Dranreb Jay Arzadon, a Computer Science student at the University of Mindanao with a passion for turning complex problems into elegant software solutions. My journey in tech started with curiosity and has grown into a deep commitment to crafting high-quality digital experiences.`,
@@ -136,7 +126,7 @@ export default function About() {
                   key={i}
                   style={{
                     color: 'rgba(255,255,255,0.65)',
-                    fontSize: '1rem',
+                    fontSize: '18px',
                     lineHeight: 1.8,
                   }}
                 >
