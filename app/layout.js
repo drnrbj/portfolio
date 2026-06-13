@@ -4,6 +4,9 @@ export const metadata = {
   title: 'Dranreb Jay Arzadon | CS Student & Software Developer',
   description:
     'Portfolio of Dranreb Jay Arzadon — Computer Science student, aspiring software developer, and web developer based in the Philippines.',
+  icons: {
+    icon: '/images/logo.png',
+  },
   keywords: [
     'portfolio',
     'software developer',
