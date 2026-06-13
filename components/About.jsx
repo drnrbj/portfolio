@@ -79,32 +79,21 @@ export default function About() {
       >
         {/* Section header */}
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <div
-            className="glass"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '8px 16px',
-              borderRadius: '9999px',
-            }}
-          >
-            <span style={{ color: '#3B82F6', fontSize: 14, fontWeight: 500 }}>About Me</span>
-          </div>
           <h2
             className="glow-text"
             style={{
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              fontSize: '80px',
+              // fontSize: 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 800,
               marginTop: '16px',
               lineHeight: 1.2,
             }}
           >
-            Who I Am
+            About Me
           </h2>
           <div
             style={{
-              width: 60,
+              width: 120,
               height: 2,
               background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)',
               margin: '16px auto 0',

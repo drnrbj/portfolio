@@ -22,9 +22,9 @@ const FacebookIcon = () => (
   </svg>
 );
 
-const InstagramIcon = () => (
+const GitHubIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
   </svg>
 );
 
@@ -45,14 +45,13 @@ const SpinnerIcon = () => (
 
 const CONTACT_ITEMS = [
   { Icon: EmailIcon, label: 'Email', value: 'jayarzadon213@gmail.com', href: 'mailto:jayarzadon213@gmail.com' },
-  { Icon: LinkedInIcon, label: 'LinkedIn', value: 'dranreb-jay-arzadon-593189414', href: 'https://linkedin.com/in/dranreb-jay-arzadon-593189414' },
-  { Icon: FacebookIcon, label: 'Facebook', value: 'dranrebjay.arzadon', href: 'https://facebook.com/dranrebjay.arzadon' },
-  { Icon: InstagramIcon, label: 'Instagram', value: '@drnrbj', href: 'https://instagram.com/drnrbj' },
+  { Icon: LinkedInIcon, label: 'LinkedIn', value: 'Dranreb Jay Arzadon', href: 'https://linkedin.com/in/dranreb-jay-arzadon-593189414' },
+  { Icon: FacebookIcon, label: 'Facebook', value: 'Dranreb Jay Arzadon', href: 'https://facebook.com/dranrebjay.arzadon' },
+  { Icon: GitHubIcon, label: 'GitHub', value: 'drnrbj', href: 'https://github.com/drnrbj' },
 ];
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Input field with focus-glow
 function Field({ label, error, children }) {
   return (
     <div style={{ marginBottom: 20 }}>
@@ -72,7 +71,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // null | 'success' | 'error'
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const inputStyle = {
     width: '100%',
@@ -149,53 +148,63 @@ export default function Contact() {
       >
         {/* Section header */}
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <div className="glass" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 9999 }}>
-            <span style={{ color: '#3B82F6', fontSize: 14, fontWeight: 500 }}>Get In Touch</span>
-          </div>
-          <h2 className="glow-text" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, marginTop: 16, lineHeight: 1.2 }}>
-            Contact Me
+          <h2 className="glow-text" style={{
+            fontSize: '80px',
+            // fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 800,
+            lineHeight: 1.2
+          }}>
+            Get In Touch
           </h2>
-          <div style={{ width: 60, height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
+          <div style={{ width: 120, height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
         </div>
 
         {/* Two-column grid */}
-        <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '0 1.5rem', display: 'grid', gap: '4rem', alignItems: 'start' }} className="contact-grid">
+        <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '0 1.5rem', display: 'grid', gap: '2rem', alignItems: 'start' }} className="contact-grid">
 
-          {/* LEFT — Info */}
-          <div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', marginBottom: 16 }}>Let's Connect</h3>
-            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.8 }}>
-              Whether you have a project in mind, an opportunity to share, or just want to say hello — my inbox is always open.
-            </p>
+          {/* LEFT — Contact Info + Availability */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
-            {/* Contact items */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 32 }}>
-              {CONTACT_ITEMS.map(({ Icon, label, value, href }) => (
-                <ContactItem key={label} Icon={Icon} label={label} value={value} href={href} />
-              ))}
+            {/* Contact Information */}
+            <div style={{
+              padding: 32,
+              borderRadius: 24,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(12px)',
+            }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: 24 }}>
+                Contact Information
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {CONTACT_ITEMS.map(({ Icon, label, value, href }) => (
+                  <ContactItem key={label} Icon={Icon} label={label} value={value} href={href} />
+                ))}
+              </div>
             </div>
 
-            {/* Availability badge */}
-            <div
-              className="glass"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '12px 20px', borderRadius: 9999, marginTop: 32 }}
-            >
-              <div style={{ position: 'relative', width: 10, height: 10 }}>
-                <div style={{ position: 'absolute', inset: 0, background: '#4ade80', borderRadius: '50%', animation: 'ping 1.5s cubic-bezier(0,0,0.2,1) infinite', opacity: 0.75 }} />
-                <div style={{ position: 'relative', width: 10, height: 10, background: '#4ade80', borderRadius: '50%' }} />
+            {/* Availability */}
+            <div className="glass" style={{ padding: 32, borderRadius: 24 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: 4.5 }}>
+                  Let's Collaborate!
+                </h3>
               </div>
-              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem' }}>
-                Available for OJT &amp; Internship Opportunities
-              </span>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontSize: '0.875rem' }}>
+                I'm currently open to OJT opportunities, internships, freelance projects, and collaborations. If you have something in mind, let's make it happen!
+              </p>
             </div>
           </div>
 
           {/* RIGHT — Form */}
           <div className="glass" style={{ padding: 32, borderRadius: 24 }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: 24 }}>
+              Send Me a Message
+            </h3>
             <Field label="Your Name" error={errors.name}>
               <input
                 type="text"
-                placeholder="John Doe"
+                placeholder="Enter your name"
                 value={formData.name}
                 onChange={set('name')}
                 onFocus={focusStyle}
@@ -206,7 +215,7 @@ export default function Contact() {
             <Field label="Your Email" error={errors.email}>
               <input
                 type="email"
-                placeholder="john@example.com"
+                placeholder="Enter your email"
                 value={formData.email}
                 onChange={set('email')}
                 onFocus={focusStyle}
@@ -269,7 +278,7 @@ export default function Contact() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: 8,
-                cursor: isSubmitting ? 'wait' : 'none',
+                cursor: isSubmitting ? 'wait' : 'pointer',
                 opacity: isSubmitting ? 0.8 : 1,
                 marginTop: 8,
                 border: 'none',
@@ -323,31 +332,57 @@ function ContactItem({ Icon, label, value, href }) {
         display: 'flex',
         alignItems: 'center',
         gap: 16,
-        padding: '16px 24px',
+        padding: '12px 20px',
         borderRadius: 12,
         textDecoration: 'none',
-        border: `1px solid ${hovered ? 'rgba(59,130,246,0.3)' : 'rgba(255,255,255,0.08)'}`,
+        border: `1px solid ${hovered ? 'rgba(59,130,246,0.4)' : 'rgba(255,255,255,0.08)'}`,
         transition: 'all 0.3s',
+        background: hovered
+          ? 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.1))'
+          : 'rgba(255, 255, 255, 0.05)',
+        boxShadow: hovered
+          ? '0 0 20px rgba(59, 130, 246, 0.3)'
+          : 'none',
+        transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
     >
       <div
         style={{
-          width: 44,
-          height: 44,
+          width: 40,
+          height: 40,
           borderRadius: 10,
-          background: 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2))',
+          background: hovered
+            ? 'linear-gradient(135deg, #3B82F6, #8B5CF6)'
+            : 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2))',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#3B82F6',
+          color: hovered ? '#fff' : '#3B82F6',
           flexShrink: 0,
+          transition: 'all 0.3s',
+          boxShadow: hovered ? '0 0 15px rgba(59,130,246,0.5)' : 'none',
         }}
       >
         <Icon />
       </div>
       <div>
-        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
-        <div style={{ color: '#fff', fontSize: '0.875rem', fontWeight: 500, marginTop: 2 }}>{value}</div>
+        <div style={{
+          color: hovered ? '#60A5FA' : 'rgba(255,255,255,0.4)',
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          transition: 'color 0.3s'
+        }}>
+          {label}
+        </div>
+        <div style={{
+          color: '#fff',
+          fontSize: '0.875rem',
+          fontWeight: 500,
+          marginTop: 2,
+        }}>
+          {value}
+        </div>
       </div>
     </a>
   );

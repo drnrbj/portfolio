@@ -7,8 +7,8 @@ module.exports = {
         accent: '#3B82F6',
         nebula: '#8B5CF6',
         cyan: '#06B6D4',
-        void: '#050510',
-        space: '#0A0A1A',
+        void: '#0A0A1A',    // Changed from #0A0A1A
+        space: '#0A0A1A',   // Keep this as is if used elsewhere
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
