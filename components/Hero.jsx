@@ -141,7 +141,7 @@ export default function Hero() {
           <div style={{ lineHeight: 1.2 }}>
             <div
               style={{
-                fontSize: 'clamp(2rem, 6vw, 80px)',
+                fontSize: 'clamp(2.5rem, 6vw, 80px)',
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 color: '#fff',
@@ -154,7 +154,7 @@ export default function Hero() {
             <h1
               className="glow-text"
               style={{
-                fontSize: 'clamp(2rem, 6vw, 80px)',
+                fontSize: 'clamp(2.5rem, 6vw, 80px)',
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 margin: '0',
