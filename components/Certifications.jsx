@@ -6,21 +6,13 @@ const CERTS = [
   {
     id: 1,
     title: 'MTA: Database Fundamentals',
-    issuer: 'Microsoft | Certiport',
-    date: '2024',
-    badge: '🗄️',
     color: '#3B82F6',
-    tags: ['SQL', 'Relational Databases', 'Database Design', 'Data Manipulation'],
     image: '/images/database.png',
   },
   {
     id: 2,
     title: 'MTA: Networking Fundamentals',
-    issuer: 'Microsoft | Certiport',
-    date: '2024',
-    badge: '🌐',
     color: '#8B5CF6',
-    tags: ['TCP/IP', 'Network Security', 'Protocols', 'Infrastructure'],
     image: '/images/network.png',
   },
 ];
@@ -54,18 +46,32 @@ function Lightbox({ image, alt, onClose }) {
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '72rem', width: '100%', borderRadius: 16, overflow: 'hidden',
+          maxWidth: '90vw',
+          maxHeight: '85vh',
+          borderRadius: 16,
+          overflow: 'hidden',
           border: '1px solid rgba(59,130,246,0.2)',
           boxShadow: '0 0 80px rgba(59,130,246,0.1)',
         }}
       >
-        <img src={image} alt={alt} style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <img
+          src={image}
+          alt={alt}
+          style={{
+            maxWidth: '90vw',
+            maxHeight: '85vh',
+            width: 'auto',
+            height: 'auto',
+            display: 'block',
+            objectFit: 'contain',
+          }}
+        />
       </div>
     </div>
   );
 }
 
-function CertCard({ cert }) {
+function CertCard({ cert, index }) {
   const cardRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -73,119 +79,124 @@ function CertCard({ cert }) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
       { threshold: 0.15 }
     );
     if (cardRef.current) observer.observe(cardRef.current);
     return () => observer.disconnect();
   }, []);
 
+  const slideFrom = index % 2 === 0 ? '-40px' : '40px';
+
   return (
     <>
       <div
         ref={cardRef}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onClick={() => setLightboxOpen(true)}
         style={{
           opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-          cursor: 'pointer',
+          transform: visible ? 'translateX(0)' : `translateX(${slideFrom})`,
+          transition: `opacity 0.6s ease-out, transform 0.6s ease-out`,
         }}
       >
-        <div style={{
-          position: 'relative',
-          background: 'rgba(255,255,255,0.03)',
-          backdropFilter: 'blur(12px)',
-          border: `1px solid ${hovered ? cert.color + '55' : 'rgba(255,255,255,0.08)'}`,
-          borderRadius: 16,
-          overflow: 'hidden',
-          transition: 'border-color 0.3s, transform 0.3s, box-shadow 0.3s',
-          transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-          boxShadow: hovered ? `0 16px 48px ${cert.color}22` : '0 4px 24px rgba(0,0,0,0.3)',
-        }}>
-
-          {/* Certificate image */}
-          <div style={{
-            aspectRatio: '16/10',
+        <div
+          onClick={() => setLightboxOpen(true)}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          style={{
+            position: 'relative',
+            borderRadius: 16,
             overflow: 'hidden',
+            cursor: 'pointer',
+            border: `1px solid ${hovered ? cert.color + '66' : 'rgba(255,255,255,0.1)'}`,
+            boxShadow: hovered
+              ? `0 20px 60px ${cert.color}28, 0 0 0 1px ${cert.color}33`
+              : '0 8px 32px rgba(0,0,0,0.4)',
+            transition: 'all 0.35s ease',
+            transform: hovered ? 'scale(1.02)' : 'scale(1)',
+            aspectRatio: '16/11',
             background: `linear-gradient(135deg, ${cert.color}12, ${cert.color}22)`,
-          }}>
-            <img
-              src={cert.image}
-              alt={cert.title}
+          }}
+        >
+          <img
+            src={cert.image}
+            alt={cert.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+              transition: 'filter 0.35s ease',
+              filter: hovered ? 'brightness(1.05)' : 'brightness(0.95)',
+            }}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+
+          {/* Bottom gradient overlay with title */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              background: 'linear-gradient(transparent, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.95))',
+              padding: '16px 20px 12px',
+            }}
+          >
+            <div
               style={{
-                width: '100%', height: '100%', objectFit: 'cover', display: 'block',
-                transition: 'filter 0.3s, transform 0.3s',
-                filter: hovered ? 'brightness(1.05)' : 'brightness(0.9)',
-                transform: hovered ? 'scale(1.02)' : 'scale(1)',
+                fontSize: '0.9rem',
+                fontWeight: 700,
+                color: '#fff',
+                letterSpacing: '0.02em',
+                textShadow: '0 2px 2px rgba(0,0,0,0.8)',
               }}
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-            />
-          </div>
-
-          {/* Bottom accent bar */}
-          <div style={{
-            height: 2,
-            background: `linear-gradient(90deg, ${cert.color}, #8B5CF6)`,
-          }} />
-
-          {/* Card info */}
-          <div style={{ padding: '1.1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-            {/* Badge */}
-            <div style={{
-              width: 42, height: 42, borderRadius: 10, flexShrink: 0,
-              background: `${cert.color}18`, border: `1px solid ${cert.color}44`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
-            }}>
-              {cert.badge}
-            </div>
-
-            {/* Text */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{
-                fontWeight: 700, fontSize: '0.92rem', color: '#fff',
-                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-              }}>
-                {cert.title}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', marginTop: 2 }}>
-                {cert.issuer} · Issued {cert.date}
-              </div>
+            >
+              {cert.title}
             </div>
           </div>
 
-          {/* Tags */}
-          <div style={{
-            padding: '0 1.25rem 1.1rem',
-            display: 'flex', flexWrap: 'wrap', gap: 6,
-          }}>
-            {cert.tags.map((tag) => (
-              <span key={tag} style={{
-                padding: '3px 10px', fontSize: '0.7rem', fontWeight: 600,
-                borderRadius: 5,
-                background: `${cert.color}12`, border: `1px solid ${cert.color}30`,
-                color: cert.color,
-              }}>
-                {tag}
-              </span>
-            ))}
-          </div>
+          {/* Accent bar */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 3,
+              background: `linear-gradient(90deg, ${cert.color}, #8B5CF6)`,
+            }}
+          />
 
           {/* View hint on hover */}
-          {hovered && (
-            <div style={{
-              position: 'absolute', top: 10, right: 10,
-              background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(6px)',
+          <div
+            style={{
+              position: 'absolute',
+              top: 12,
+              right: 12,
+              background: 'rgba(0,0,0,0.5)',
+              backdropFilter: 'blur(6px)',
               border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 6, padding: '3px 9px',
-              fontSize: '0.68rem', fontWeight: 600, color: '#fff',
-              letterSpacing: '0.05em', textTransform: 'uppercase',
-            }}>
-              View
-            </div>
-          )}
+              borderRadius: 6,
+              padding: '4px 10px',
+              fontSize: '0.7rem',
+              fontWeight: 600,
+              color: '#fff',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              opacity: hovered ? 1 : 0,
+              transition: 'opacity 0.2s',
+              pointerEvents: 'none',
+            }}
+          >
+            View
+          </div>
         </div>
       </div>
 
@@ -202,7 +213,12 @@ export default function Certifications() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setHeaderVisible(true); observer.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+          observer.disconnect();
+        }
+      },
       { threshold: 0.1 }
     );
     if (headerRef.current) observer.observe(headerRef.current);
@@ -217,7 +233,6 @@ export default function Certifications() {
       </div>
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
-
         {/* Header */}
         <div
           ref={headerRef}
@@ -228,33 +243,35 @@ export default function Certifications() {
             transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
           }}
         >
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.08)', borderRadius: 9999,
-            padding: '8px 16px', marginBottom: 16,
-          }}>
-            <span style={{ color: '#3B82F6', fontSize: 14, fontWeight: 500 }}>Credentials</span>
-          </div>
-          <h2 className="glow-text" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
+          <h2 className="glow-text" style={{ fontSize: '80px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
             Certifications
           </h2>
-          <div style={{ width: 60, height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
+          <div style={{ width: 120, height: 2, background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)', margin: '16px auto 0', borderRadius: 2 }} />
         </div>
 
         {/* Two cards side by side */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem',
-          maxWidth: '52rem',
-          margin: '0 auto',
-        }}>
-          {CERTS.map((cert) => (
-            <CertCard key={cert.id} cert={cert} />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+            gap: '2rem',
+            maxWidth: '68rem',
+            margin: '0 auto',
+          }}
+        >
+          {CERTS.map((cert, index) => (
+            <CertCard key={cert.id} cert={cert} index={index} />
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .cert-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
