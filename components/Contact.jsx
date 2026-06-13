@@ -50,26 +50,23 @@ const CONTACT_ITEMS = [
   { Icon: GitHubIcon, label: 'GitHub', value: 'drnrbj', href: 'https://github.com/drnrbj' },
 ];
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function Field({ label, error, children }) {
+function Field({ label, children }) {
   return (
     <div style={{ marginBottom: 20 }}>
       <label style={{ display: 'block', color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem', fontWeight: 500, marginBottom: 8 }}>
         {label}
       </label>
       {children}
-      {error && <div style={{ color: '#f87171', fontSize: '0.75rem', marginTop: 4 }}>{error}</div>}
     </div>
   );
 }
 
 export default function Contact() {
   const sectionRef = useRef(null);
+  const formRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [errors, setErrors] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
@@ -102,24 +99,22 @@ export default function Contact() {
     e.target.style.borderColor = '#3B82F6';
     e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)';
   };
+  
   const blurStyle = (e) => {
     e.target.style.borderColor = 'rgba(255,255,255,0.1)';
     e.target.style.boxShadow = 'none';
   };
 
-  const validateForm = () => {
-    const e = { name: '', email: '', subject: '', message: '' };
-    let ok = true;
-    if (!formData.name.trim() || formData.name.trim().length < 2) { e.name = 'Name must be at least 2 characters.'; ok = false; }
-    if (!formData.email.trim() || !EMAIL_RE.test(formData.email)) { e.email = 'Please enter a valid email address.'; ok = false; }
-    if (!formData.subject.trim() || formData.subject.trim().length < 3) { e.subject = 'Subject must be at least 3 characters.'; ok = false; }
-    if (!formData.message.trim() || formData.message.trim().length < 10) { e.message = 'Message must be at least 10 characters.'; ok = false; }
-    setErrors(e);
-    return ok;
-  };
-
-  const handleSubmit = async () => {
-    if (!validateForm()) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Check form validity using native browser validation
+    if (!formRef.current.checkValidity()) {
+      // Trigger native browser validation UI
+      formRef.current.reportValidity();
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
@@ -150,7 +145,6 @@ export default function Contact() {
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <h2 className="glow-text" style={{
             fontSize: '80px',
-            // fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 800,
             lineHeight: 1.2
           }}>
@@ -201,101 +195,151 @@ export default function Contact() {
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: 24 }}>
               Send Me a Message
             </h3>
-            <Field label="Your Name" error={errors.name}>
-              <input
-                type="text"
-                placeholder="Enter your name"
-                value={formData.name}
-                onChange={set('name')}
-                onFocus={focusStyle}
-                onBlur={blurStyle}
-                style={inputStyle}
-              />
-            </Field>
-            <Field label="Your Email" error={errors.email}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={set('email')}
-                onFocus={focusStyle}
-                onBlur={blurStyle}
-                style={inputStyle}
-              />
-            </Field>
-            <Field label="Subject" error={errors.subject}>
-              <input
-                type="text"
-                placeholder="What's on your mind?"
-                value={formData.subject}
-                onChange={set('subject')}
-                onFocus={focusStyle}
-                onBlur={blurStyle}
-                style={inputStyle}
-              />
-            </Field>
-            <Field label="Message" error={errors.message}>
-              <textarea
-                rows={5}
-                placeholder="Tell me more..."
-                value={formData.message}
-                onChange={set('message')}
-                onFocus={focusStyle}
-                onBlur={blurStyle}
-                style={{ ...inputStyle, resize: 'none' }}
-              />
-            </Field>
+            
+            <form ref={formRef} onSubmit={handleSubmit} noValidate>
+              <Field label="Your Name">
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={set('name')}
+                  onFocus={focusStyle}
+                  onBlur={blurStyle}
+                  style={inputStyle}
+                  required
+                  minLength={2}
+                  onInvalid={(e) => {
+                    e.target.setCustomValidity('');
+                    if (!e.target.value) {
+                      e.target.setCustomValidity('Please enter your name');
+                    } else if (e.target.value.length < 2) {
+                      e.target.setCustomValidity('Name must be at least 2 characters');
+                    }
+                  }}
+                  onInput={(e) => e.target.setCustomValidity('')}
+                />
+              </Field>
+              
+              <Field label="Your Email">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={set('email')}
+                  onFocus={focusStyle}
+                  onBlur={blurStyle}
+                  style={inputStyle}
+                  required
+                  onInvalid={(e) => {
+                    e.target.setCustomValidity('');
+                    if (!e.target.value) {
+                      e.target.setCustomValidity('Please enter your email address');
+                    } else {
+                      e.target.setCustomValidity('Please enter a valid email (e.g., name@example.com)');
+                    }
+                  }}
+                  onInput={(e) => e.target.setCustomValidity('')}
+                />
+              </Field>
+              
+              <Field label="Subject">
+                <input
+                  type="text"
+                  placeholder="What's on your mind?"
+                  value={formData.subject}
+                  onChange={set('subject')}
+                  onFocus={focusStyle}
+                  onBlur={blurStyle}
+                  style={inputStyle}
+                  required
+                  minLength={3}
+                  onInvalid={(e) => {
+                    e.target.setCustomValidity('');
+                    if (!e.target.value) {
+                      e.target.setCustomValidity('Please enter a subject');
+                    } else if (e.target.value.length < 3) {
+                      e.target.setCustomValidity('Subject must be at least 3 characters');
+                    }
+                  }}
+                  onInput={(e) => e.target.setCustomValidity('')}
+                />
+              </Field>
+              
+              <Field label="Message">
+                <textarea
+                  rows={5}
+                  placeholder="Tell me more..."
+                  value={formData.message}
+                  onChange={set('message')}
+                  onFocus={focusStyle}
+                  onBlur={blurStyle}
+                  style={{ ...inputStyle, resize: 'none' }}
+                  required
+                  minLength={10}
+                  onInvalid={(e) => {
+                    e.target.setCustomValidity('');
+                    if (!e.target.value) {
+                      e.target.setCustomValidity('Please enter your message');
+                    } else if (e.target.value.length < 10) {
+                      e.target.setCustomValidity(`Message needs ${10 - e.target.value.length} more characters (minimum 10)`);
+                    }
+                  }}
+                  onInput={(e) => e.target.setCustomValidity('')}
+                />
+              </Field>
 
-            {/* Status messages */}
-            {submitStatus === 'success' && (
-              <div
-                className="glass"
-                style={{ border: '1px solid rgba(74,222,128,0.3)', background: 'rgba(74,222,128,0.05)', padding: '12px 16px', borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 16 }}
-              >
-                <span style={{ color: '#4ade80', fontSize: 18 }}>✓</span>
-                <span style={{ color: '#86efac', fontSize: '0.875rem' }}>Message sent successfully! I'll get back to you soon.</span>
-              </div>
-            )}
-            {submitStatus === 'error' && (
-              <div
-                className="glass"
-                style={{ border: '1px solid rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.05)', padding: '12px 16px', borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 16 }}
-              >
-                <span style={{ color: '#f87171', fontSize: 18 }}>!</span>
-                <span style={{ color: '#fca5a5', fontSize: '0.875rem' }}>Something went wrong. Please try again or email me directly.</span>
-              </div>
-            )}
-
-            {/* Submit button */}
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="btn-primary"
-              style={{
-                width: '100%',
-                height: 52,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                cursor: isSubmitting ? 'wait' : 'pointer',
-                opacity: isSubmitting ? 0.8 : 1,
-                marginTop: 8,
-                border: 'none',
-              }}
-            >
-              {isSubmitting ? (
-                <>
-                  <SpinnerIcon />
-                  <span>Sending...</span>
-                </>
-              ) : (
-                <>
-                  <SendIcon />
-                  <span>Send Message</span>
-                </>
+              {/* Status messages */}
+              {submitStatus === 'success' && (
+                <div
+                  className="glass"
+                  style={{ border: '1px solid rgba(74,222,128,0.3)', background: 'rgba(74,222,128,0.05)', padding: '12px 16px', borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 16 }}
+                >
+                  <span style={{ color: '#4ade80', fontSize: 18 }}>✓</span>
+                  <span style={{ color: '#86efac', fontSize: '0.875rem' }}>Message sent successfully! I'll get back to you soon.</span>
+                </div>
               )}
-            </button>
+              
+              {submitStatus === 'error' && (
+                <div
+                  className="glass"
+                  style={{ border: '1px solid rgba(248,113,113,0.3)', background: 'rgba(248,113,113,0.05)', padding: '12px 16px', borderRadius: 12, display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 16 }}
+                >
+                  <span style={{ color: '#f87171', fontSize: 18 }}>!</span>
+                  <span style={{ color: '#fca5a5', fontSize: '0.875rem' }}>Something went wrong. Please try again or email me directly.</span>
+                </div>
+              )}
+
+              {/* Submit button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary"
+                style={{
+                  width: '100%',
+                  height: 52,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                  cursor: isSubmitting ? 'wait' : 'pointer',
+                  opacity: isSubmitting ? 0.8 : 1,
+                  marginTop: 8,
+                  border: 'none',
+                }}
+              >
+                {isSubmitting ? (
+                  <>
+                    <SpinnerIcon />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <SendIcon />
+                    <span>Send Message</span>
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
       </div>
