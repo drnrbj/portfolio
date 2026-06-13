@@ -93,7 +93,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
             <Image
-              src="/images/logo.png"
+              src="/images/logos.png"
               alt="DJ Logo"
               width={44}
               height={44}
