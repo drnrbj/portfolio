@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { label: 'Home', href: '#home', id: 'home' },
   { label: 'About', href: '#about', id: 'about' },
   { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Certifications', href: '#certifications', id: 'certifications' },
   { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
@@ -46,7 +47,7 @@ export default function Navbar() {
           if (entry.isIntersecting) setActiveSection(id);
         },
         {
-          rootMargin: '-30% 0px -60% 0px', // triggers when section is in the upper 40% of viewport
+          rootMargin: '-30% 0px -60% 0px',
           threshold: 0,
         }
       );
