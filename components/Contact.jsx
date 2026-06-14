@@ -110,7 +110,8 @@ export default function Contact() {
     return formRef.current.checkValidity();
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
