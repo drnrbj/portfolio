@@ -121,8 +121,8 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: 'bee2b1ef-3e10-4f01-a5dc-e4df7d7e68c6',
-          from_name: formData.name,
-          replyto: formData.email,
+          name: formData.name,
+          email: formData.email,
           subject: formData.subject,
           message: formData.message,
         }),
