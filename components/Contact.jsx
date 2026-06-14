@@ -105,8 +105,14 @@ export default function Contact() {
     e.target.style.boxShadow = 'none';
   };
 
+  const validateForm = () => {
+    if (!formRef.current) return false;
+    return formRef.current.checkValidity();
+  };
+
   const handleSubmit = async () => {
     if (!validateForm()) return;
+
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
