@@ -99,31 +99,38 @@ export default function Contact() {
     e.target.style.borderColor = '#3B82F6';
     e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)';
   };
-  
+
   const blurStyle = (e) => {
     e.target.style.borderColor = 'rgba(255,255,255,0.1)';
     e.target.style.boxShadow = 'none';
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Check form validity using native browser validation
-    if (!formRef.current.checkValidity()) {
-      // Trigger native browser validation UI
-      formRef.current.reportValidity();
-      return;
-    }
-    
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
-      await new Promise((r) => setTimeout(r, 1500));
-      setSubmitStatus('success');
-      setTimeout(() => {
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setSubmitStatus(null);
-      }, 3000);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'bee2b1ef-3e10-4f01-a5dc-e4df7d7e68c6',
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        setTimeout(() => {
+          setFormData({ name: '', email: '', subject: '', message: '' });
+          setSubmitStatus(null);
+        }, 3000);
+      } else {
+        setSubmitStatus('error');
+      }
     } catch {
       setSubmitStatus('error');
     } finally {
@@ -195,7 +202,7 @@ export default function Contact() {
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: 24 }}>
               Send Me a Message
             </h3>
-            
+
             <form ref={formRef} onSubmit={handleSubmit} noValidate>
               <Field label="Your Name">
                 <input
@@ -219,7 +226,7 @@ export default function Contact() {
                   onInput={(e) => e.target.setCustomValidity('')}
                 />
               </Field>
-              
+
               <Field label="Your Email">
                 <input
                   type="email"
@@ -241,7 +248,7 @@ export default function Contact() {
                   onInput={(e) => e.target.setCustomValidity('')}
                 />
               </Field>
-              
+
               <Field label="Subject">
                 <input
                   type="text"
@@ -264,7 +271,7 @@ export default function Contact() {
                   onInput={(e) => e.target.setCustomValidity('')}
                 />
               </Field>
-              
+
               <Field label="Message">
                 <textarea
                   rows={5}
@@ -298,7 +305,7 @@ export default function Contact() {
                   <span style={{ color: '#86efac', fontSize: '0.875rem' }}>Message sent successfully! I'll get back to you soon.</span>
                 </div>
               )}
-              
+
               {submitStatus === 'error' && (
                 <div
                   className="glass"
