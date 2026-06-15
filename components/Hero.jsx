@@ -111,8 +111,13 @@ export default function Hero() {
         }}
         className="hero-grid"
       >
-        {/* ---- LEFT COLUMN ---- */}
-        <div className="hero-left" style={{ order: 1 }}>
+        {/* ---- LEFT COLUMN (Profile) ---- */}
+        <div className="hero-left" style={{ order: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', paddingLeft: '80px' }}>
+          <CodeOrbit containerSize={360} topOffset={-100} />
+        </div>
+
+        {/* ---- RIGHT COLUMN (Text) ---- */}
+        <div className="hero-right" style={{ order: 2, marginTop: '-80px' }}>
           {/* Typewriter role */}
           <div
             style={{
@@ -200,73 +205,32 @@ export default function Hero() {
               Contact Me
             </button>
           </div>
-
-          {/* Social icons */}
-          <div style={{ display: 'flex', gap: '1.25rem', marginTop: '32px' }}>
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="glass"
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'rgba(255,255,255,0.5)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  transition: 'all 0.3s',
-                  textDecoration: 'none',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#3B82F6';
-                  e.currentTarget.style.color = '#3B82F6';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.5)';
-                }}
-              >
-                <Icon />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* ---- RIGHT COLUMN ---- */}
-        <div className="hero-right" style={{ order: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <CodeOrbit containerSize={360} topOffset={-100} />
         </div>
       </div>
 
       <style dangerouslySetInnerHTML={{
         __html: `
-      @media (max-width: 1023px) {
-        .hero-grid {
-          grid-template-columns: 1fr !important;
+        @media (max-width: 1023px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .hero-left {
+            order: -1 !important;
+            margin-bottom: 1rem;
+          }
+          .hero-right {
+            order: 2 !important;
+            text-align: center;
+          }
+          .hero-right > div:first-child {
+            justify-content: center;
+          }
         }
-        .hero-right {
-          order: -1 !important;
-          margin-bottom: 1rem;
-        }
-        .hero-left {
-          order: 2 !important;
-          text-align: center;
-        }
-        .hero-left > div:first-child {
-          justify-content: center;
-        }
-      }
 
-      @keyframes spin-slow {
-        to { transform: rotate(360deg); }
-      }
-      ` }} />
+        @keyframes spin-slow {
+          to { transform: rotate(360deg); }
+        }
+        ` }} />
     </section>
   );
 }
