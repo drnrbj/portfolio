@@ -240,7 +240,7 @@ export default function Hero() {
 
         {/* ---- RIGHT COLUMN ---- */}
         <div className="hero-right" style={{ order: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <CodeOrbit containerSize={360} topOffset={-20} />
+          <CodeOrbit containerSize={360} topOffset={-100} />
         </div>
       </div>
 
