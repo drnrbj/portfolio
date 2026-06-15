@@ -150,18 +150,22 @@ export default function About() {
                 >
                   University of Mindanao
                 </span>{' '}
-                with a passion for turning complex problems into elegant software solutions.
-                My journey in tech started with curiosity and has grown into a deep commitment
-                to crafting high-quality digital experiences.
+                who enjoys building software that solves practical problems.
+                What began as curiosity about how technology works has grown into a
+                commitment to developing reliable, user-focused applications and continuously
+                improving my skills as a developer.
               </p>
 
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '16px', lineHeight: 1.8, margin: 0 }}>
-                I specialize in full-stack web development, working across modern JavaScript
-                frameworks, PHP-based backend systems, and database design. I also have
-                hands-on experience with machine learning concepts, which I've applied in
-                academic projects. I'm driven by collaboration, clean design, and the belief that
-                the best software solves real human problems. I am always looking for my next
-                challenge.
+                My interests include{' '}
+                <span style={{ color: 'rgb(255, 255, 255)', fontWeight: 700 }}>
+                  full-stack web development, software engineering, and machine learning
+                </span>
+                , with experience gained through academic and personal projects.
+                I enjoy turning ideas into functional solutions, refining them through testing
+                and iteration, and writing code that is both efficient and maintainable.
+                I value continuous learning, collaboration, and the challenge of creating
+                technology that delivers meaningful impact.
               </p>
             </div>
 

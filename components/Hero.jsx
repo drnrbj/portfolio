@@ -1,6 +1,7 @@
 'use client';
 
 import StarField from '@/components/StarField';
+import CodeOrbit from '@/components/CodeOrbit';
 import { useEffect, useState } from 'react';
 
 const ROLES = ['WELCOME TO MY PORTFOLIO', 'WELCOME TO MY PORTFOLIO', 'WELCOME TO MY PORTFOLIO'];
@@ -176,10 +177,10 @@ export default function Hero() {
               marginTop: '24px',
             }}
           >
-            A passionate Computer Science student dedicated to building robust web
-            applications, software systems, and machine learning solutions. I focus on
-            creating meaningful digital experiences, guided by continuous learning and a
-            deep curiosity for modern technologies.
+            Computer Science student focused on building practical web
+            applications and exploring machine learning. I enjoy solving
+            real-world problems through code, and I'm always eager to learn
+            new tools and improve my skills along the way.
           </p>
 
           {/* CTA buttons */}
@@ -239,72 +240,12 @@ export default function Hero() {
 
         {/* ---- RIGHT COLUMN ---- */}
         <div className="hero-right" style={{ order: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div
-            className="animate-float"
-            style={{ position: 'relative', width: 'clamp(220px, 40vw, 360px)', height: 'clamp(220px, 40vw, 360px)', margin: '0 auto' }}
-          >
-            {/* Glow backdrop */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                borderRadius: '50%',
-                boxShadow: '0 0 60px rgba(59,130,246,0.2), 0 0 120px rgba(139,92,246,0.1)',
-                pointerEvents: 'none',
-              }}
-            />
-
-            {/* Spinning circle border */}
-            <div
-              className="animate-spin-slow"
-              style={{
-                position: 'absolute',
-                inset: -4,
-                borderRadius: '50%',
-                background:
-                  'conic-gradient(from 0deg, transparent, #3B82F6, transparent, #8B5CF6, transparent)',
-              }}
-            />
-
-            {/* Spinning rectangle border */}
-            <div
-              className="animate-spin-slow"
-              style={{
-                position: 'absolute',
-                inset: -20,
-                borderRadius: '32px',
-                background:
-                  'conic-gradient(from 180deg, transparent, #8B5CF6, transparent, #3B82F6, transparent)',
-                animation: 'spin-slow 6s linear infinite reverse',
-              }}
-            />
-
-            {/* Profile image circle */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 3,
-                borderRadius: '50%',
-                overflow: 'hidden',
-                background: 'linear-gradient(135deg, #1e1b4b, #1e3a5f)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                src="/images/profile.png"
-                alt="Dranreb Jay Arzadon"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
-          </div>
+          <CodeOrbit containerSize={360} topOffset={-20} />
         </div>
       </div>
 
       <style dangerouslySetInnerHTML={{
-            __html: `
+        __html: `
       @media (max-width: 1023px) {
         .hero-grid {
           grid-template-columns: 1fr !important;

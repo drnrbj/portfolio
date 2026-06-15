@@ -10,6 +10,7 @@ const PROJECTS = [
       'A comprehensive HR and workforce management platform built to streamline hotel operations — covering employee scheduling, attendance tracking, payroll processing, and performance evaluations across departments.',
     tags: ['PHP', 'Laravel', 'MySQL', 'Tailwind CSS', 'React', 'TypeScript'],
     image: { src: '/images/employee.jpg', alt: 'Hotel Employee Management System dashboard' },
+    github: 'https://github.com/drnrbj/Hotel-Employee-Management-System',
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const PROJECTS = [
       'A machine learning-powered system that analyzes network traffic patterns to identify and classify potential security threats in real-time, providing actionable alerts and detailed threat reports.',
     tags: ['Python', 'Machine Learning', 'Jupyter Notebook', 'Scikit-learn'],
     image: { src: '/images/networkintrusion.png', alt: 'Network Intrusion Detection System interface' },
+    github: 'https://github.com/drnrbj/A-Hybrid-Random-Forest-TabNet-Approach-for-Network-Intrusion-Detection',
   },
   {
     id: 3,
@@ -26,6 +28,7 @@ const PROJECTS = [
       'A web-based clinic management system built for dental practices — streamlining patient registration, appointment scheduling, treatment recording, and billing with role-based access for admin, receptionist, and dentist users.',
     tags: ['Laravel', 'React', 'Inertia.js', 'TailwindCSS', 'SQLite'],
     image: { src: '/images/dentalcrms.png', alt: 'Dental Clinic patient dashboard' },
+    github: 'https://github.com/drnrbj/Dental-Clinic-CRMS',
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ const PROJECTS = [
       'A lightweight appointment booking system for salons — allowing customers to browse services, select stylists, and book time slots with an intuitive interface designed for ease of use on any device.',
     tags: ['PHP', 'HTML', 'CSS', 'JavaScript'],
     image: { src: '/images/salon.png', alt: 'Salon Booking System homepage' },
+    github: 'https://github.com/airo-coder/salon',
   },
 ];
 
@@ -132,12 +136,49 @@ function Lightbox({ project, onClose }) {
   );
 }
 
+/* ── GitHub Icon SVG ──────────────────────────────────────────────────── */
+function GitHubIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      style={{ display: 'block' }}
+    >
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>
+  );
+}
+
+/* ── External Link Icon ───────────────────────────────────────────────── */
+function ExternalLinkIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ display: 'block' }}
+    >
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
+  );
+}
+
 /* ── Project Row ──────────────────────────────────────────────────────── */
 function ProjectRow({ project, index }) {
   const rowRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [imgHovered, setImgHovered] = useState(false);
+  const [repoHovered, setRepoHovered] = useState(false);
 
   const isEven = index % 2 === 0; // even → image left; odd → image right
 
@@ -352,6 +393,57 @@ function ProjectRow({ project, index }) {
                 </span>
               ))}
             </div>
+
+            {/* GitHub Repository Link */}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setRepoHovered(true)}
+                onMouseLeave={() => setRepoHovered(false)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 20px',
+                  borderRadius: 10,
+                  background: repoHovered 
+                    ? 'rgba(59,130,246,0.12)' 
+                    : 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${repoHovered ? 'rgba(59,130,246,0.35)' : 'rgba(255,255,255,0.08)'}`,
+                  color: repoHovered ? '#60A5FA' : 'rgba(255,255,255,0.6)',
+                  textDecoration: 'none',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  transition: 'all 0.25s ease',
+                  alignSelf: 'flex-start',
+                  boxShadow: repoHovered 
+                    ? '0 4px 15px rgba(59,130,246,0.15)' 
+                    : 'none',
+                  transform: repoHovered ? 'translateY(-1px)' : 'translateY(0)',
+                }}
+              >
+                <span style={{ 
+                  display: 'flex', 
+                  alignItems: 'center',
+                  color: repoHovered ? '#60A5FA' : 'rgba(255,255,255,0.5)',
+                  transition: 'color 0.25s ease',
+                }}>
+                  <GitHubIcon />
+                </span>
+                <span>View Repository</span>
+                <span style={{ 
+                  display: 'flex', 
+                  alignItems: 'center',
+                  opacity: repoHovered ? 1 : 0.5,
+                  transition: 'opacity 0.25s ease',
+                }}>
+                  <ExternalLinkIcon />
+                </span>
+              </a>
+            )}
           </div>
         </div>
       </div>
