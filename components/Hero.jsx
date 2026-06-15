@@ -15,21 +15,19 @@ export default function Hero() {
 
   // Entrance animation after loading screen
   useEffect(() => {
-    // Use requestAnimationFrame to ensure DOM is ready
     const raf = requestAnimationFrame(() => {
       const timer = setTimeout(() => {
         setIsVisible(true);
-        // Trigger animations after visible state is set
         requestAnimationFrame(() => {
           setAnimationsStarted(true);
         });
-      }, 300); // Slightly increased delay for smoother transition
+      }, 300);
       return () => clearTimeout(timer);
     });
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  // Safety fallback - ensure animations play even if something delays the initial trigger
+  // Safety fallback
   useEffect(() => {
     const safetyTimer = setTimeout(() => {
       if (!isVisible) {
@@ -38,7 +36,7 @@ export default function Hero() {
           setAnimationsStarted(true);
         });
       }
-    }, 5000); // Failsafe: show after 5 seconds max
+    }, 5000);
     return () => clearTimeout(safetyTimer);
   }, [isVisible]);
 
@@ -80,6 +78,7 @@ export default function Hero() {
         position: 'relative',
         overflow: 'hidden',
         paddingTop: 80,
+        paddingBottom: 40,
       }}
     >
       <StarField />
@@ -143,6 +142,7 @@ export default function Hero() {
         >
           {/* Typewriter role */}
           <div
+            className="hero-typewriter"
             style={{
               height: 32,
               display: 'flex',
@@ -207,6 +207,7 @@ export default function Hero() {
 
           {/* Description */}
           <p
+            className="hero-description"
             style={{
               color: 'rgba(255,255,255,0.6)',
               fontSize: 'clamp(0.875rem, 2vw, 18px)',
@@ -226,6 +227,7 @@ export default function Hero() {
 
           {/* CTA buttons */}
           <div 
+            className="hero-buttons"
             style={{ 
               display: 'flex', 
               flexWrap: 'wrap', 
@@ -259,18 +261,34 @@ export default function Hero() {
         @media (max-width: 1023px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
           }
           .hero-left {
             order: -1 !important;
-            margin-bottom: 1rem;
             padding-left: 0 !important;
+            margin-bottom: 0 !important;
           }
           .hero-right {
             order: 2 !important;
             text-align: center;
+            margin-top: 0 !important;
           }
-          .hero-right > div:first-child {
+          .hero-typewriter {
             justify-content: center;
+          }
+          .hero-description {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .hero-buttons {
+            justify-content: center;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .hero-left {
+            transform: scale(0.8) !important;
+            margin-bottom: -20px !important;
           }
         }
 
