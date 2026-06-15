@@ -11,77 +11,60 @@ function StarField() {
     const ctx = canvas.getContext('2d');
     let animationId;
 
-    const createShooter = (w, h) => ({
-      x: Math.random() * w * 0.7,
-      y: Math.random() * h * 0.4,
-      len: Math.random() * 100 + 50,
-      speed: Math.random() * 3 + 2, // Slower (was 6+4, now 2-5)
-      angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3,
-      alpha: 1,
-      color: Math.random() < 0.5 ? '#93C5FD' : '#C4B5FD',
-      active: false,
-      timer: Math.random() * 150 + 50, // More frequent (was 400+100, now 50-200)
+    const createOrb = (w, h) => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      radius: Math.random() * 120 + 100,
+      baseAlpha: Math.random() * 0.05 + 0.05, // Slightly brighter (was 0.04+0.03, now 0.05-0.10)
+      speedX: (Math.random() - 0.5) * 0.3,
+      speedY: (Math.random() - 0.5) * 0.3,
+      pulseSpeed: Math.random() * 0.005 + 0.003,
+      pulseOffset: Math.random() * Math.PI * 2,
+      color: Math.random() < 0.5 ? '#3B82F6' : '#8B5CF6',
     });
 
-    let shooters = [];
+    let orbs = [];
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      shooters = Array.from({ length: 5 }, () => createShooter(canvas.width, canvas.height)); // More shooters (was 3)
+      orbs = Array.from({ length: 3 }, () => createOrb(canvas.width, canvas.height));
     };
 
     resize();
-
-    const drawShooters = (w, h) => {
-      for (const s of shooters) {
-        s.timer--;
-        if (s.timer <= 0 && !s.active) {
-          s.active = true;
-          s.x = Math.random() * w * 0.6;
-          s.y = Math.random() * h * 0.3;
-          s.alpha = 1;
-          s.timer = Math.random() * 200 + 80; // Quicker respawn (was 500+200)
-        }
-        if (!s.active) continue;
-
-        s.x += Math.cos(s.angle) * s.speed;
-        s.y += Math.sin(s.angle) * s.speed;
-        s.alpha -= 0.012; // Slower fade (was 0.018)
-
-        if (s.alpha <= 0) { s.active = false; continue; }
-
-        const tailX = s.x - Math.cos(s.angle) * s.len;
-        const tailY = s.y - Math.sin(s.angle) * s.len;
-
-        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
-        grad.addColorStop(0, 'transparent');
-        grad.addColorStop(1, s.color);
-
-        ctx.globalAlpha = s.alpha * 0.85;
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
-        ctx.lineTo(s.x, s.y);
-        ctx.stroke();
-
-        // Bright tip
-        ctx.globalAlpha = s.alpha;
-        ctx.fillStyle = '#fff';
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.globalAlpha = 1;
-      }
-    };
 
     const draw = () => {
       const { width, height } = canvas;
       ctx.clearRect(0, 0, width, height);
 
-      drawShooters(width, height);
+      const now = Date.now();
+
+      for (const orb of orbs) {
+        orb.x += orb.speedX;
+        orb.y += orb.speedY;
+
+        if (orb.x < -orb.radius) orb.x = width + orb.radius;
+        if (orb.x > width + orb.radius) orb.x = -orb.radius;
+        if (orb.y < -orb.radius) orb.y = height + orb.radius;
+        if (orb.y > height + orb.radius) orb.y = -orb.radius;
+
+        const pulse = Math.sin(now * orb.pulseSpeed + orb.pulseOffset);
+        const alpha = orb.baseAlpha + pulse * orb.baseAlpha * 0.6;
+
+        const gradient = ctx.createRadialGradient(
+          orb.x, orb.y, 0,
+          orb.x, orb.y, orb.radius
+        );
+        gradient.addColorStop(0, orb.color + Math.floor(alpha * 255).toString(16).padStart(2, '0'));
+        gradient.addColorStop(0.4, orb.color + Math.floor(alpha * 0.6 * 255).toString(16).padStart(2, '0'));
+        gradient.addColorStop(1, 'transparent');
+
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       animationId = requestAnimationFrame(draw);
     };
@@ -105,7 +88,6 @@ function StarField() {
         width: '100%',
         height: '100%',
         pointerEvents: 'none',
-        willChange: 'transform',
       }}
     />
   );
