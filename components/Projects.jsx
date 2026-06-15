@@ -7,7 +7,7 @@ const PROJECTS = [
     id: 1,
     title: 'Hotel Employee Management System',
     description:
-      'A comprehensive HR and workforce management platform built to streamline hotel operations — covering employee scheduling, attendance tracking, payroll processing, and performance evaluations across departments.',
+      'A comprehensive HR and workforce management platform designed to streamline hotel operations. It supports employee scheduling, attendance tracking, payroll processing, and performance evaluation across different departments.',
     tags: ['PHP', 'Laravel', 'MySQL', 'Tailwind CSS', 'React', 'TypeScript'],
     image: { src: '/images/employee.jpg', alt: 'Hotel Employee Management System dashboard' },
     github: 'https://github.com/drnrbj/Hotel-Employee-Management-System',
@@ -16,7 +16,7 @@ const PROJECTS = [
     id: 2,
     title: 'Network Intrusion Detection System',
     description:
-      'A machine learning-powered system that analyzes network traffic patterns to identify and classify potential security threats in real-time, providing actionable alerts and detailed threat reports.',
+      'A machine learning-based system that analyzes network traffic to detect and classify potential security threats in real time. It generates alerts and provides detailed reports for monitoring and analysis.',
     tags: ['Python', 'Machine Learning', 'Jupyter Notebook', 'Scikit-learn'],
     image: { src: '/images/networkintrusion.png', alt: 'Network Intrusion Detection System interface' },
     github: 'https://github.com/drnrbj/A-Hybrid-Random-Forest-TabNet-Approach-for-Network-Intrusion-Detection',
@@ -25,7 +25,7 @@ const PROJECTS = [
     id: 3,
     title: 'Dental Clinic CRMS',
     description:
-      'A web-based clinic management system built for dental practices — streamlining patient registration, appointment scheduling, treatment recording, and billing with role-based access for admin, receptionist, and dentist users.',
+      'A web-based clinic management system for dental practices that simplifies patient registration, appointment scheduling, treatment records, and billing. It includes role-based access for administrators, receptionists, and dentists.',
     tags: ['Laravel', 'React', 'Inertia.js', 'TailwindCSS', 'SQLite'],
     image: { src: '/images/dentalcrms.png', alt: 'Dental Clinic patient dashboard' },
     github: 'https://github.com/drnrbj/Dental-Clinic-CRMS',
@@ -34,7 +34,7 @@ const PROJECTS = [
     id: 4,
     title: 'Salon Booking System',
     description:
-      'A lightweight appointment booking system for salons — allowing customers to browse services, select stylists, and book time slots with an intuitive interface designed for ease of use on any device.',
+      'A simple appointment booking system for salons that allows customers to browse services, select stylists, and schedule appointments through an easy-to-use and responsive interface.',
     tags: ['PHP', 'HTML', 'CSS', 'JavaScript'],
     image: { src: '/images/salon.png', alt: 'Salon Booking System homepage' },
     github: 'https://github.com/airo-coder/salon',
