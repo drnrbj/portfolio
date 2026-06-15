@@ -2,31 +2,42 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+// ─── SKILL_CATEGORIES: fix icon slugs + unify to blue/purple palette ───
 const SKILL_CATEGORIES = [
   {
     name: 'Frontend',
-    color: '#3B82F6',
-    skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS'],
+    color: '#3B82F6',           // blue-500 — unchanged
+    skills: [
+      { name: 'HTML',         icon: 'html5' },
+      { name: 'CSS',          icon: 'css' },          // was 'css3' → fixed
+      { name: 'JavaScript',   icon: 'javascript' },
+      { name: 'TypeScript',   icon: 'typescript' },
+      { name: 'React',        icon: 'react' },
+      { name: 'Next.js',      icon: 'nextdotjs' },
+      { name: 'Tailwind', icon: 'tailwindcss' },
+    ],
   },
   {
     name: 'Backend',
-    color: '#8B5CF6',
-    skills: ['PHP', 'Laravel', 'Java', 'Python', 'MySQL'],
+    color: '#8B5CF6',           // violet-500 — unchanged
+    skills: [
+      { name: 'PHP',     icon: 'php' },
+      { name: 'Laravel', icon: 'laravel' },
+      { name: 'Java',    icon: 'openjdk' },
+      { name: 'Python',  icon: 'python' },
+      { name: 'MySQL',   icon: 'mysql' },
+    ],
   },
   {
     name: 'Tools',
-    color: '#10B981',
-    skills: ['Git', 'GitHub', 'VS Code', 'IntelliJ IDEA', 'Figma', 'Jupyter Notebook'],
+    color: '#6366F1',           // was '#10B981' (green) → now indigo to stay blue/purple
+    skills: [
+      { name: 'Git',             icon: 'git' },
+      { name: 'GitHub',          icon: 'github' },
+      { name: 'Figma',           icon: 'figma' },
+      { name: 'Jupyter',icon: 'jupyter' },
+    ],
   },
-];
-
-const SOFT_SKILLS = [
-  { label: 'Problem Solving', icon: '◈', color: '#3B82F6' },
-  { label: 'Collaboration', icon: '◈', color: '#8B5CF6' },
-  { label: 'Adaptability', icon: '◈', color: '#10B981' },
-  { label: 'Attention to Detail', icon: '◈', color: '#F59E0B' },
-  { label: 'Communication', icon: '◈', color: '#EC4899' },
-  { label: 'Self-Motivated', icon: '◈', color: '#06B6D4' },
 ];
 
 const EDUCATION = [
@@ -112,7 +123,7 @@ export default function About() {
         {/* Two column layout */}
         <div
           style={{
-            maxWidth: '80rem',
+            maxWidth: '1280px',
             margin: '0 auto',
             padding: '0 1.5rem',
             display: 'grid',
@@ -255,9 +266,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN — Two stacked cards matching left column height */}
+          {/* RIGHT COLUMN — Technical Skills card fills full height */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-
             {/* Technical Skills card */}
             <div
               className="glass"
@@ -267,6 +277,7 @@ export default function About() {
                 border: '1px solid rgba(255,255,255,0.08)',
                 display: 'flex',
                 flexDirection: 'column',
+                flex: 1,
               }}
             >
               <h3
@@ -281,16 +292,24 @@ export default function About() {
                 Technical Skills
               </h3>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {/* Changed: Removed flex: 1 from parent, using grid for equal heights */}
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: '1fr', 
+                gap: '14px',
+                flex: 1,
+              }}>
                 {SKILL_CATEGORIES.map((category) => (
                   <div
                     key={category.name}
                     style={{
-                      padding: '14px 16px',
+                      padding: '16px',
                       borderRadius: '10px',
                       background: `${category.color}09`,
                       border: `1px solid ${category.color}22`,
                       borderLeft: `3px solid ${category.color}`,
+                      display: 'flex',
+                      flexDirection: 'column',
                     }}
                   >
                     {/* Category header */}
@@ -299,7 +318,7 @@ export default function About() {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '10px',
-                        marginBottom: '10px',
+                        marginBottom: '12px',
                       }}
                     >
                       <span
@@ -315,45 +334,12 @@ export default function About() {
                     </div>
 
                     {/* Skill chips */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                       {category.skills.map((skill) => (
-                        <SkillChip key={skill} skill={skill} color={category.color} />
+                        <SkillChip key={skill.name} skill={skill.name} icon={skill.icon} color={category.color} />
                       ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Soft Skills + Quote card */}
-            <div
-              className="glass"
-              style={{
-                padding: '28px',
-                borderRadius: '16px',
-                border: '1px solid rgba(255,255,255,0.08)',
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  color: '#fff',
-                  margin: 0,
-                  letterSpacing: '0.03em',
-                }}
-              >
-                Soft Skills
-              </h3>
-
-              {/* Soft skill chips */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {SOFT_SKILLS.map((s) => (
-                  <SoftSkillChip key={s.label} label={s.label} color={s.color} />
                 ))}
               </div>
             </div>
@@ -375,7 +361,7 @@ export default function About() {
   );
 }
 
-function SkillChip({ skill, color }) {
+function SkillChip({ skill, icon, color }) {
   const [hovered, setHovered] = useState(false);
   return (
     <span
@@ -383,76 +369,39 @@ function SkillChip({ skill, color }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         display: 'inline-flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        gap: '6px',
-        padding: '4px 10px',
-        fontSize: '0.72rem',
-        borderRadius: '5px',
+        justifyContent: 'center',
+        gap: '8px',
+        padding: '12px 14px',
+        minWidth: '76px',
+        fontSize: '0.7rem',
+        borderRadius: '10px',
         color: hovered ? '#fff' : 'rgba(255,255,255,0.55)',
         background: hovered ? `${color}1e` : 'rgba(255,255,255,0.04)',
         border: `1px solid ${hovered ? `${color}55` : 'rgba(255,255,255,0.07)'}`,
         fontWeight: 600,
-        letterSpacing: '0.03em',
+        letterSpacing: '0.02em',
+        textAlign: 'center',
         transition: 'all 0.15s ease',
         cursor: 'default',
-        transform: hovered ? 'translateY(-1px)' : 'none',
+        transform: hovered ? 'translateY(-2px)' : 'none',
         boxShadow: hovered ? `0 4px 10px ${color}28` : 'none',
         userSelect: 'none',
       }}
     >
-      <span
+      <img
+        src={`https://cdn.simpleicons.org/${icon}/${hovered ? color.replace('#', '') : 'ffffff'}`}
+        alt=""
+        width={28}
+        height={28}
         style={{
-          width: 4,
-          height: 4,
-          borderRadius: '1px',
-          background: hovered ? color : `${color}80`,
+          opacity: hovered ? 1 : 0.6,
+          transition: 'opacity 0.15s ease',
           flexShrink: 0,
-          transition: 'background 0.15s ease',
         }}
       />
       {skill}
-    </span>
-  );
-}
-
-function SoftSkillChip({ label, color }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <span
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '7px',
-        padding: '6px 12px',
-        fontSize: '0.78rem',
-        borderRadius: '20px',
-        color: hovered ? '#fff' : 'rgba(255,255,255,0.6)',
-        background: hovered ? `${color}18` : 'rgba(255,255,255,0.04)',
-        border: `1px solid ${hovered ? `${color}50` : 'rgba(255,255,255,0.08)'}`,
-        fontWeight: 600,
-        letterSpacing: '0.02em',
-        transition: 'all 0.15s ease',
-        cursor: 'default',
-        transform: hovered ? 'translateY(-1px)' : 'none',
-        boxShadow: hovered ? `0 4px 12px ${color}22` : 'none',
-        userSelect: 'none',
-      }}
-    >
-      {/* Pill dot */}
-      <span
-        style={{
-          width: 6,
-          height: 6,
-          borderRadius: '50%',
-          background: hovered ? color : `${color}70`,
-          flexShrink: 0,
-          transition: 'background 0.15s ease',
-          boxShadow: hovered ? `0 0 6px ${color}` : 'none',
-        }}
-      />
-      {label}
     </span>
   );
 }
