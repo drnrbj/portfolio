@@ -7,10 +7,12 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CursorEffect from '@/components/CursorEffect';
 import BackToTop from '@/components/BackToTop';
+import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Home() {
   return (
     <>
+      <LoadingScreen />
       <CursorEffect />
       <Navbar />
       <main id="main-content">
