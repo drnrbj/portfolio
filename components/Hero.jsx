@@ -225,7 +225,7 @@ export default function Hero() {
             new tools and improve my skills along the way.
           </p>
 
-          {/* CTA buttons */}
+          {/* CTA button */}
           <div 
             className="hero-buttons"
             style={{ 
@@ -300,6 +300,7 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         ` }} />
+
     </section>
   );
 }
