@@ -2,7 +2,7 @@
 
 import StarField from '@/components/StarField';
 import CodeOrbit from '@/components/CodeOrbit';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const ROLES = ['WELCOME TO MY PORTFOLIO', 'WELCOME TO MY PORTFOLIO', 'WELCOME TO MY PORTFOLIO'];
 
@@ -12,6 +12,7 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [animationsStarted, setAnimationsStarted] = useState(false);
+  const gridCanvasRef = useRef(null);
 
   // Entrance animation after loading screen
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function Hero() {
   // Typewriter effect
   useEffect(() => {
     if (!isVisible) return;
-    
+
     let timeout;
     const currentRole = ROLES[currentRoleIndex];
 
@@ -64,6 +65,72 @@ export default function Hero() {
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentRoleIndex, isVisible]);
 
+  // Grid lines animation
+  useEffect(() => {
+    const canvas = gridCanvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let animationFrame;
+
+    const resizeCanvas = () => {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const gridSize = 50;
+    let offset = 0;
+
+    const drawGrid = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const opacity = animationsStarted ? 0.08 : 0.03;
+
+      ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
+      ctx.lineWidth = 0.5;
+
+      // Vertical lines
+      for (let x = (offset % gridSize); x < canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+
+      // Horizontal lines
+      for (let y = (offset % gridSize); y < canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw subtle dots at intersections
+      ctx.fillStyle = `rgba(96, 165, 250, ${opacity * 1.5})`;
+      for (let x = (offset % gridSize); x < canvas.width; x += gridSize) {
+        for (let y = (offset % gridSize); y < canvas.height; y += gridSize) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      offset += 0.15; // Slow movement
+      animationFrame = requestAnimationFrame(drawGrid);
+    };
+
+    drawGrid();
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, [animationsStarted]);
+
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -81,6 +148,17 @@ export default function Hero() {
         paddingBottom: 40,
       }}
     >
+      {/* Grid Lines Canvas */}
+      <canvas
+        ref={gridCanvasRef}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}
+      />
+
       <StarField />
       <div
         style={{
@@ -114,13 +192,13 @@ export default function Hero() {
         className="hero-grid"
       >
         {/* ---- LEFT COLUMN (Profile) ---- */}
-        <div 
-          className="hero-left" 
-          style={{ 
-            order: 1, 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
+        <div
+          className="hero-left"
+          style={{
+            order: 1,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             paddingLeft: '80px',
             opacity: animationsStarted ? 1 : 0,
             transform: animationsStarted ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(30px)',
@@ -131,10 +209,10 @@ export default function Hero() {
         </div>
 
         {/* ---- RIGHT COLUMN (Text) ---- */}
-        <div 
-          className="hero-right" 
-          style={{ 
-            order: 2, 
+        <div
+          className="hero-right"
+          style={{
+            order: 2,
             marginTop: '-80px',
             opacity: animationsStarted ? 1 : 0,
             transition: 'opacity 0.6s ease-out 0.5s',
@@ -170,8 +248,8 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <div 
-            style={{ 
+          <div
+            style={{
               lineHeight: 1.2,
               opacity: animationsStarted ? 1 : 0,
               transform: animationsStarted ? 'translateX(0)' : 'translateX(-40px)',
@@ -197,7 +275,7 @@ export default function Hero() {
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 margin: '0',
-                textShadow: '0 0 40px rgba(59,130,246,0.5)',
+                textShadow: '0 0 20px rgba(59,130,246,0.3)', // Reduced blur and opacity
                 lineHeight: 1.1,
               }}
             >
@@ -226,12 +304,12 @@ export default function Hero() {
           </p>
 
           {/* CTA button */}
-          <div 
+          <div
             className="hero-buttons"
-            style={{ 
-              display: 'flex', 
-              flexWrap: 'wrap', 
-              gap: '1rem', 
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '1rem',
               marginTop: '32px',
               opacity: animationsStarted ? 1 : 0,
               transform: animationsStarted ? 'translateY(0)' : 'translateY(20px)',
