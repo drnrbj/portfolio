@@ -275,7 +275,7 @@ export default function Hero() {
                 fontWeight: 900,
                 letterSpacing: '-0.02em',
                 margin: '0',
-                textShadow: '0 0 20px rgba(59,130,246,0.3)', // Reduced blur and opacity
+                textShadow: '0 0 30px rgba(99,102,241,0.2), 0 0 60px rgba(139,92,246,0.1)',
                 lineHeight: 1.1,
               }}
             >

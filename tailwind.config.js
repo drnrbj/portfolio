@@ -3,12 +3,19 @@ module.exports = {
   content: ['./app/**/*.{js,jsx}', './components/**/*.{js,jsx}'],
   theme: {
     extend: {
+      // tailwind.config.js
       colors: {
-        accent: '#3B82F6',
-        nebula: '#8B5CF6',
+        accent: '#3B82F6',      // Keep as solid blue
+        nebula: '#8B5CF6',      // Keep as solid purple
         cyan: '#06B6D4',
-        void: '#0A0A1A',    // Changed from #0A0A1A
-        space: '#0A0A1A',   // Keep this as is if used elsewhere
+        void: '#0A0A1A',
+        space: '#0A0A1A',
+        // Add intermediate gradient stops for smoother transitions
+        'blue-purple': {
+          400: '#5B8AF7',       // Blue-leaning
+          500: '#7B6BF6',       // Mid-point
+          600: '#9B4CF5',       // Purple-leaning
+        }
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
