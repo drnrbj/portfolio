@@ -46,7 +46,7 @@ const EDUCATION = [
     school: 'University of Mindanao',
     detail: 'Bachelor of Science in Computer Science',
     period: '2023 - Present',
-    focus: 'Machine Learning, Software Engineering, Cybersecurity',
+    focus: 'Machine Learning, Web Development, Cybersecurity',
     color: '#3B82F6',
   },
 ];
