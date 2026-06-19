@@ -5,15 +5,21 @@ import { useEffect, useRef, useState } from 'react';
 const CERTS = [
   {
     id: 1,
-    title: 'MTA: Database Fundamentals',
+    title: 'IT Specialist - Databases',
+    issuer: 'Certiport / Pearson VUE',
+    issued: 'Issued May 2025',
     color: '#3B82F6',
     image: '/images/database.png',
+    link: 'https://www.credly.com/your-database-link',
   },
   {
     id: 2,
-    title: 'MTA: Networking Fundamentals',
+    title: 'IT Specialist - Networking',
+    issuer: 'Certiport / Pearson VUE',
+    issued: 'Issued Mar 2026',
     color: '#8B5CF6',
     image: '/images/network.png',
+    link: 'https://www.credly.com/your-network-link',
   },
 ];
 
@@ -104,99 +110,139 @@ function CertCard({ cert, index }) {
         }}
       >
         <div
-          onClick={() => setLightboxOpen(true)}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           style={{
-            position: 'relative',
             borderRadius: 16,
             overflow: 'hidden',
-            cursor: 'pointer',
+            background: hovered
+              ? `${cert.color}0D`
+              : 'rgba(255,255,255,0.03)',
             border: `1px solid ${hovered ? cert.color + '66' : 'rgba(255,255,255,0.1)'}`,
             boxShadow: hovered
               ? `0 20px 60px ${cert.color}28, 0 0 0 1px ${cert.color}33`
               : '0 8px 32px rgba(0,0,0,0.4)',
             transition: 'all 0.35s ease',
-            transform: hovered ? 'scale(1.02)' : 'scale(1)',
-            aspectRatio: '16/11',
-            background: `linear-gradient(135deg, ${cert.color}12, ${cert.color}22)`,
+            transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+            cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          <img
-            src={cert.image}
-            alt={cert.title}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-              transition: 'filter 0.35s ease',
-              filter: hovered ? 'brightness(1.05)' : 'brightness(0.95)',
-            }}
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-
-          {/* Bottom gradient overlay with title */}
+          {/* Image - clickable to enlarge */}
           <div
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxOpen(true);
+            }}
             style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              background: 'linear-gradient(transparent, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.95))',
-              padding: '16px 20px 12px',
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '16/11',
+              overflow: 'hidden',
+              cursor: 'zoom-in',
+              background: `linear-gradient(135deg, ${cert.color}12, ${cert.color}22)`,
+              flexShrink: 0,
             }}
           >
+            <img
+              src={cert.image}
+              alt={cert.title}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+                transition: 'transform 0.35s ease, filter 0.35s ease',
+                transform: hovered ? 'scale(1.05)' : 'scale(1)',
+                filter: hovered ? 'brightness(1.05)' : 'brightness(0.95)',
+              }}
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+
+            {/* View hint on hover */}
             <div
               style={{
-                fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
-                fontWeight: 700,
+                position: 'absolute',
+                top: 12,
+                right: 12,
+                background: 'rgba(0,0,0,0.5)',
+                backdropFilter: 'blur(6px)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: 6,
+                padding: '4px 10px',
+                fontSize: '0.7rem',
+                fontWeight: 600,
                 color: '#fff',
-                letterSpacing: '0.02em',
-                textShadow: '0 2px 2px rgba(0,0,0,0.8)',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                opacity: hovered ? 1 : 0,
+                transition: 'opacity 0.2s',
+                pointerEvents: 'none',
               }}
             >
-              {cert.title}
+              View
             </div>
           </div>
 
-          {/* Accent bar */}
-          <div
+          {/* Card body - clicking goes to Credly */}
+          <a
+            href={cert.link}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 3,
-              background: `linear-gradient(90deg, ${cert.color}, #8B5CF6)`,
-            }}
-          />
-
-          {/* View hint on hover */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 12,
-              right: 12,
-              background: 'rgba(0,0,0,0.5)',
-              backdropFilter: 'blur(6px)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 6,
-              padding: '4px 10px',
-              fontSize: '0.7rem',
-              fontWeight: 600,
-              color: '#fff',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              opacity: hovered ? 1 : 0,
-              transition: 'opacity 0.2s',
-              pointerEvents: 'none',
+              textDecoration: 'none',
+              padding: '20px 22px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              flex: 1,
             }}
           >
-            View
-          </div>
+            {/* Title */}
+            <h3
+              style={{
+                margin: 0,
+                fontSize: '1rem',
+                fontWeight: 700,
+                color: hovered ? '#93C5FD' : '#fff',
+                lineHeight: 1.35,
+                letterSpacing: '-0.01em',
+                transition: 'color 0.3s ease',
+              }}
+            >
+              {cert.title}
+            </h3>
+
+            {/* Issuer - gradient text */}
+            <div
+              style={{
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                background: 'linear-gradient(90deg, #3B82F6, #8B5CF6)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                letterSpacing: '0.01em',
+              }}
+            >
+              {cert.issuer}
+            </div>
+
+            {/* Issued date */}
+            <div
+              style={{
+                fontSize: '0.85rem',
+                color: 'rgba(255,255,255,0.4)',
+                fontWeight: 500,
+                letterSpacing: '0.02em',
+              }}
+            >
+              {cert.issued}
+            </div>
+          </a>
         </div>
       </div>
 
