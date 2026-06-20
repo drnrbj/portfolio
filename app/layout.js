@@ -5,7 +5,11 @@ export const metadata = {
   description:
     'Portfolio of Dranreb Jay Arzadon',
   icons: {
-    icon: '/images/logos.png',
+    icon: [
+      { url: '/images/djlogo.svg', type: 'image/svg+xml' },
+      { url: '/images/djlogo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/djlogo.png', sizes: '192x192', type: 'image/png' },
+    ],
   },
   keywords: [
     'portfolio',

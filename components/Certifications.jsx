@@ -10,7 +10,6 @@ const CERTS = [
     issued: 'Issued May 2025',
     color: '#3B82F6',
     image: '/images/database.png',
-    link: 'https://www.credly.com/your-database-link',
   },
   {
     id: 2,
@@ -19,7 +18,6 @@ const CERTS = [
     issued: 'Issued Mar 2026',
     color: '#8B5CF6',
     image: '/images/network.png',
-    link: 'https://www.credly.com/your-network-link',
   },
 ];
 

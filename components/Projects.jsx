@@ -14,15 +14,6 @@ const PROJECTS = [
   },
   {
     id: 2,
-    title: 'Network Intrusion Detection System',
-    description:
-      'A machine learning-based system that analyzes network traffic to detect and classify potential security threats in real time. It generates alerts and provides detailed reports for monitoring and analysis.',
-    tags: ['Python', 'Machine Learning', 'Jupyter Notebook', 'Scikit-learn'],
-    image: { src: '/images/networkintrusion.png', alt: 'Network Intrusion Detection System interface' },
-    github: 'https://github.com/drnrbj/A-Hybrid-Random-Forest-TabNet-Approach-for-Network-Intrusion-Detection',
-  },
-  {
-    id: 3,
     title: 'Dental Clinic CRMS',
     description:
       'A web-based clinic management system for dental practices that simplifies patient registration, appointment scheduling, treatment records, and billing. It includes role-based access for administrators, receptionists, and dentists.',
@@ -31,13 +22,40 @@ const PROJECTS = [
     github: 'https://github.com/drnrbj/Dental-Clinic-CRMS',
   },
   {
+    id: 3,
+    title: 'Network Intrusion Detection System',
+    description:
+      'A machine learning-based system that analyzes network traffic to detect and classify potential security threats. It generates alerts and provides detailed reports for monitoring and analysis.',
+    tags: ['Python', 'Machine Learning', 'Jupyter Notebook', 'Scikit-learn'],
+    image: { src: '/images/networkintrusion.png', alt: 'Network Intrusion Detection System interface' },
+    github: 'https://github.com/drnrbj/A-Hybrid-Random-Forest-TabNet-Approach-for-Network-Intrusion-Detection',
+  },
+  {
     id: 4,
+    title: 'Lung Cancer Detection System',
+    description:
+      'A machine learning-based diagnostic tool that analyzes patient health data to detect and classify lung cancer risk levels. Built with Python and Streamlit, it features an interactive web interface where users can input symptoms and risk factors to receive real-time predictions using a Random Forest model.',
+    tags: ['Python', 'Jupyter Notebook', 'Scikit-learn'],
+    image: { src: '/images/lungcancer.png', alt: 'Lung Cancer Detection System interface' },
+    github: 'https://github.com/drnrbj/LungCancerDetection',
+  },
+  {
+    id: 5,
     title: 'Salon Booking System',
     description:
       'A simple appointment booking system for salons that allows customers to browse services, select stylists, and schedule appointments through an easy-to-use and responsive interface.',
     tags: ['PHP', 'HTML', 'CSS', 'JavaScript'],
     image: { src: '/images/salon.png', alt: 'Salon Booking System homepage' },
     github: 'https://github.com/airo-coder/salon',
+  },
+  {
+    id: 6,
+    title: 'Collaboration Room Booking System',
+    description:
+      'A web-based library room reservation system where students can browse available collaboration rooms, check real-time availability, and book time slots. Admins can manage room schedules, approve/reject booking requests, and monitor room utilization.',
+    tags: ['PHP', 'MySQL', 'HTML', 'CSS'],
+    image: { src: '/images/collab.png', alt: 'Library Collaboration Room Booking System interface' },
+    github: 'https://github.com/airo-coder/Library-Collaboration-Room-Booking-System',
   },
 ];
 
